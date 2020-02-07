@@ -56,7 +56,17 @@ class LinkedList
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      raise NotImplementedError
+      current = @head
+      if current.nil?
+        return nil
+      elsif index == 0
+        return current.data
+      else
+        index.times do
+          current = current.next
+        end
+        return current.data
+      end
     end
 
     # method to print all the values in the linked list
@@ -109,7 +119,15 @@ class LinkedList
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      raise NotImplementedError
+      current = @head
+      if current.nil?
+        @head = Node.new(value, @head)
+      else
+        until current.next.nil?
+          current = current.next
+        end
+        current.next = Node.new(value, nil)
+      end
     end
 
     # method that returns the value of the last node in the linked list
