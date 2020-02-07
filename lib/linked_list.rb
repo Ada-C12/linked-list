@@ -133,7 +133,15 @@ class LinkedList
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+      current = @head
+      if current.nil?
+        return nil
+      else
+        until current.next.nil?
+          current = current.next
+        end
+        return current.data
+      end
     end
 
     # method to insert a new node with specific data value, assuming the linked
