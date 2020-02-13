@@ -39,7 +39,17 @@ class LinkedList
     def find_min
       raise NotImplementedError
     end
-
+    
+    # delete five (not from assignment)
+    def del_five
+      5.times do |i|
+        if @head.nil?
+          return
+        else
+          @head = @head.next
+        end
+      end
+    end
 
     # method that returns the length of the singly linked list
     def length
@@ -66,7 +76,25 @@ class LinkedList
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
-      raise NotImplementedError
+      return if head.nil?
+      current = @head
+      previous = nil
+      # until current.nil?
+      #   temp = current
+      #   current = current.next
+      #   temp.next = previous
+      #   previous = temp
+      # end
+      # @head = previous
+      until current.next.nil?
+        temp = current.next
+        current.next = previous
+        previous = current
+        current = temp
+      end
+
+      current.next = previous
+      @head = current
     end
 
 
@@ -74,6 +102,39 @@ class LinkedList
     # returns the value at the middle element in the singly linked list
     def find_middle_value
       raise NotImplementedError
+    end
+
+    def kth_from_last(k)
+      current = @head
+      k_ahead = @head
+
+      # check that k is positive
+      return if k <= 0
+
+      k.times do
+        return if k_ahead.nil?
+        k_ahead = k_ahead.next
+      end
+
+      until k_ahead.nil?
+        current = current.next
+        k_ahead = k_ahead.next
+      end
+      return current.data
+
+      # straight forward way
+      # length = 0
+      # until current.nil?
+      #   length += 1
+      #   current = current.next
+      # end
+
+      # return nil if k > length
+      # current = @head
+      # (length-k).times do
+      #   current = current.next
+      # end
+      # return current.data
     end
 
     # find the nth node from the end and return its value
