@@ -40,13 +40,31 @@ class LinkedList
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      current = @head
+      temp = current
+
+      until current.nil?
+        if current > temp
+          temp = current
+        end
+        current = current.next
+      end
+      return temp.data
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
-      raise NotImplementedError
+      current = @head
+      temp = current
+
+      until current.nil?
+        if current < temp
+          temp = current
+        end
+        current = current.next
+      end
+      return temp.data
     end
     
     # delete five (not from assignment)
