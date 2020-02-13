@@ -19,7 +19,23 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      raise NotImplementedError
+      current = @head
+      # add new node with provided value and set next to current
+      new_node = Node.new(value, current)
+      # new node becomes head
+      @head = new_node
+    end
+
+    # returns the value in the first node
+    # returns nil if the list is empty
+    def get_first
+      # if the list is empty, head is nil?
+      if @head.nil?
+        return nil
+      else 
+        value = @head.data # this is returning nil
+        return value
+      end
     end
 
     # method to find if the linked list contains a node with specified value
@@ -95,14 +111,6 @@ class LinkedList
     # linked list links to a node already visited.
     # returns true if a cycle is found, false otherwise.
     def has_cycle
-      raise NotImplementedError
-    end
-
-
-    # Additional Exercises 
-    # returns the value in the first node
-    # returns nil if the list is empty
-    def get_first
       raise NotImplementedError
     end
 
