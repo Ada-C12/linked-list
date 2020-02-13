@@ -111,7 +111,15 @@ class LinkedList
   # method to return the max value in the linked list
   # returns the data value and not the node
   def find_max
-    raise NotImplementedError
+    current = @head
+    max = 0
+    
+    until current == nil
+      if current.data > max
+        max = current.data
+      end
+    end
+    return max
   end
   
   # method to return the min value in the linked list
