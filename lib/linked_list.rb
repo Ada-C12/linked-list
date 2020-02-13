@@ -19,7 +19,8 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      raise NotImplementedError
+      new_node = Node.new(value, next_node = @head)
+      @head = new_node
     end
 
     # method to find if the linked list contains a node with specified value
@@ -79,7 +80,21 @@ class LinkedList
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
     def find_nth_from_end(n)
-      raise NotImplementedError
+      current = @head
+      n_ahead = @head
+
+      n.times do |i|
+        return if n_ahead.nil?
+
+        n_ahead = n_ahead.next
+      end
+
+      until n_ahead.next.nil?
+        current = current.next
+        n_ahead = n_ahead.next
+      end
+
+      return current.data
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -94,7 +109,11 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      else 
+        return @head.data
+      end
     end
 
     # method that inserts a given value as a new last node in the linked list
