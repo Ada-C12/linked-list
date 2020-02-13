@@ -25,7 +25,16 @@ class LinkedList
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
-      raise NotImplementedError
+      current = @head
+
+      until current.nil?  
+        return true if current.data == value
+
+        current = current. next
+      end
+
+      return false
+      
     end
 
     # method to return the max value in the linked list
