@@ -33,11 +33,11 @@ class LinkedList
       if @head.nil?
         return nil
       else 
-        value = @head.data # this is returning nil
+        value = @head.data
         return value
       end
     end
-
+ 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
@@ -45,8 +45,7 @@ class LinkedList
 
       until current.nil?  
         return true if current.data == value
-
-        current = current. next
+        current = current.next
       end
 
       return false
