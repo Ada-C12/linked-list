@@ -41,7 +41,7 @@ class LinkedList
     current = @head
     return nil if current.nil?
     max = 0
-    until current.next.nil?
+    until current.nil?
       if current.data > max
         max = current.data
       end
@@ -58,7 +58,7 @@ class LinkedList
     return nil if current.nil?
     min = current.data
 
-    until current.next.nil?
+    until current.nil?
       if current.data < min
         min = current.data
       end
