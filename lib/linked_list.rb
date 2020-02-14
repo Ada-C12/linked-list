@@ -43,10 +43,13 @@ class LinkedList
       current = @head
       temp = current
 
+      return if current.nil?
+
       until current.nil?
-        if current > temp
+        if current.data > temp.data
           temp = current
         end
+        # highest_value = temp
         current = current.next
       end
       return temp.data
@@ -58,10 +61,13 @@ class LinkedList
       current = @head
       temp = current
 
+      return if current.nil?
+
       until current.nil?
-        if current < temp
+        if current.data < temp.data
           temp = current
         end
+        # min_value = temp
         current = current.next
       end
       return temp.data
@@ -80,7 +86,16 @@ class LinkedList
 
     # method that returns the length of the singly linked list
     def length
-      raise NotImplementedError
+      current = @head
+      count = 0
+
+      return count if current.nil?
+
+      until current.nil?
+        count += 1
+        current = current.next
+      end
+      return count
     end
 
     # method that returns the value at a given index in the linked list
@@ -182,12 +197,22 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      else
+        return @head.data
+      end
     end
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      raise NotImplementedError
+      current = @head
+
+      until current.next.nil?
+        current = current.next
+      end
+
+      current += value
     end
 
     # method that returns the value of the last node in the linked list
