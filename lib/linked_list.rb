@@ -19,31 +19,58 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      raise NotImplementedError
+      @head = Node.new(value, @head)
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
-    def search(value)
-      raise NotImplementedError
+    def search(value, current=@head)
+      return false if current.nil?
+      return true if current.data == value
+      search(value, current.next)
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
-    def find_max
-      raise NotImplementedError
+    def find_max(max=@head&.data, current=@head)
+      return max if @head&.next.nil?
+      
+      if current.data > max
+        find_max(current.data, current.next)
+      else
+        find_max(max, current.next)
+      end
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    def find_min
-      raise NotImplementedError
+    def find_min(min=@head&.data, current=@head)
+      return min if @head&.next.nil?
+      
+      if current.data < min
+        find_min(current.data, current.next)
+      else
+        find_min(min, current.next)
+      end
     end
 
 
     # method that returns the length of the singly linked list
     def length
-      raise NotImplementedError
+      counter = 1
+      current = @head
+
+      if @head.nil?
+        return 0
+      end
+
+      until current.next.nil?
+        current = current.next 
+        counter += 1
+      end
+
+      return counter
+      
     end
 
     # method that returns the value at a given index in the linked list
@@ -94,7 +121,7 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      raise NotImplementedError
+      @head&.data
     end
 
     # method that inserts a given value as a new last node in the linked list
