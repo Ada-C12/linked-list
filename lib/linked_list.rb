@@ -1,4 +1,3 @@
-
 # Defines a node in the singly linked list
 class Node
   attr_reader :data # allow external entities to read value but not write
@@ -122,6 +121,7 @@ class LinkedList
         else
           print "#{current.data} -> "
         end
+        current = current.next
       end
     end
 
@@ -164,6 +164,8 @@ class LinkedList
         previous_node = current_node
         current_node = next_node
       end
+
+      @head = previous_node
     end
 
 
@@ -175,6 +177,8 @@ class LinkedList
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def find_nth_from_end(n)
       return nil if @head.nil?
       pointer_A = @head
@@ -205,12 +209,16 @@ class LinkedList
     # Additional Exercises 
     # returns the value in the first node
     # returns nil if the list is empty
+    # Time Complexity: O(1)
+    # Space Complexity: O(1)
     def get_first
       return nil if @head.nil?
       return @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def add_last(value)
       if @head.nil?
         add_first(value)
@@ -228,6 +236,8 @@ class LinkedList
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def get_last
       return nil if @head.nil?
 
@@ -240,8 +250,26 @@ class LinkedList
 
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def insert_ascending(value)
-      raise NotImplementedError
+      return add_first(value) if @head.nil?
+
+      
+      if @head.data >= value
+        @head = Node.new(value, @head)
+        return
+      end
+      
+      current = @head
+      until current.nil? do
+        if current.next.nil? || current.next.data >= value
+          current.next = Node.new(value, current.next)
+          return
+        else
+          current = current.next
+        end
+      end
     end
 
     # Helper method for tests
@@ -259,9 +287,3 @@ class LinkedList
       current.next = @head # make the last node link to first node
     end
 end
-
-
-list = LinkedList.new
-list.add_first(1)
-list.add_first(2)
-list.add_first(3)
