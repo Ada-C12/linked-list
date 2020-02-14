@@ -76,8 +76,12 @@ class LinkedList
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
-    def get_at_index(index)
-      raise NotImplementedError
+    def get_at_index(index, current=@head)
+      if current.nil? || current.next.nil? || index == 0
+        return current&.data
+      end
+      
+      get_at_index(index - 1, current.next)
     end
 
     # method to print all the values in the linked list
