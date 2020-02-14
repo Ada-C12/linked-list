@@ -101,14 +101,28 @@ class LinkedList
     current = @head
     return nil if current.nil?
     until current.nil?
-      puts current
+      puts current.data
       current = current.next
     end
   end
   
   # method to delete the first node found with specified value
   def delete(value)
-    raise NotImplementedError
+    return nil if @head.nil?
+    current = @head
+    previous = nil
+    until current.nil?
+      if current.data == value
+        # previous.next = current.next
+        if previous == nil
+          @head = current.next
+        else
+          previous.next = current.next
+        end
+      end
+      previous = current
+      current = current.next
+    end
   end
   
   # method to reverse the singly linked list
