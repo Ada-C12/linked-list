@@ -126,13 +126,21 @@ class LinkedList
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      raise NotImplementedError
+      return @head = Node.new(value) unless @head
+      
+      last = @head
+      last = last.next while last.next
+      last.next = Node.new(value)
     end
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+      return nil unless @head
+      
+      last = @head
+      last = last.next until last.next.nil?
+      last.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
