@@ -19,9 +19,6 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      # new_node = Node.new(value)
-      # new_node.next = @head
-      # @head = new_node
       @head = Node.new(value, @head)
     end
 
@@ -49,7 +46,6 @@ class LinkedList
         if current.data > temp.data
           temp = current
         end
-        # highest_value = temp
         current = current.next
       end
       return temp.data
@@ -67,7 +63,6 @@ class LinkedList
         if current.data < temp.data
           temp = current
         end
-        # min_value = temp
         current = current.next
       end
       return temp.data
@@ -114,7 +109,11 @@ class LinkedList
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      current = @head
+      
+      until current.nil?
+        print current.data
+      end
     end
 
     # method to delete the first node found with specified value
@@ -144,13 +143,7 @@ class LinkedList
       return if @head.nil?
       current = @head
       previous = nil
-      # until current.nil?
-      #   temp = current
-      #   current = current.next
-      #   temp.next = previous
-      #   previous = temp
-      # end
-      # @head = previous
+
       until current.next.nil?
         temp = current.next
         current.next = previous
@@ -167,41 +160,12 @@ class LinkedList
     # returns the value at the middle element in the singly linked list
     def find_middle_value
       length = self.length
-
-
-    end
-
-    def kth_from_last(k)
-      current = @head
-      k_ahead = @head
-
-      # check that k is positive
-      return if k <= 0
-
-      k.times do
-        return if k_ahead.nil?
-        k_ahead = k_ahead.next
+      if length % 2 == 0
+        value = (length / 2) - 1
+      else
+        value = (length / 2)
       end
-
-      until k_ahead.nil?
-        current = current.next
-        k_ahead = k_ahead.next
-      end
-      return current.data
-
-      # straight forward way
-      # length = 0
-      # until current.nil?
-      #   length += 1
-      #   current = current.next
-      # end
-
-      # return nil if k > length
-      # current = @head
-      # (length-k).times do
-      #   current = current.next
-      # end
-      # return current.data
+      return self.get_at_index(value)
     end
 
     # find the nth node from the end and return its value
@@ -211,7 +175,6 @@ class LinkedList
       n_ahead = @head
 
       return nil if current.nil?
-      # return if n <= 0
 
       n.times do
         return nil if n_ahead.next.nil?
