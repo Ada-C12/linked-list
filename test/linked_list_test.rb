@@ -110,11 +110,11 @@ describe LinkedList do
     end
 
     describe 'get_at_index' do
-        xit 'returns nil if the index is outside the bounds of the list' do
+        it 'returns nil if the index is outside the bounds of the list' do
             expect(@list.get_at_index(3)).must_be_nil
         end
 
-        xit 'can retrieve an item at an index in the list' do
+        it 'can retrieve an item at an index in the list' do
             @list.add_first(1)
             @list.add_first(2)
             @list.add_first(3)
@@ -128,12 +128,12 @@ describe LinkedList do
     end
 
     describe 'max and min values' do
-        xit 'returns nil if the list is empty' do
+        it 'returns nil if the list is empty' do
             expect(@list.find_max()).must_be_nil
             expect(@list.find_min()).must_be_nil
         end
 
-        xit 'can retrieve the max and min values in the list' do
+        it 'can retrieve the max and min values in the list' do
             count = 0
             while count < 5
                 @list.add_first(count)
