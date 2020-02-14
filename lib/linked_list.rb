@@ -121,16 +121,21 @@ class LinkedList
       raise NotImplementedError
     end
 
-
     # Additional Exercises 
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      return @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
+      if @head.nil?
+        return @head = Node.new(value)
+      end
+
       current = @head
 
       until current.next.nil?
@@ -144,7 +149,15 @@ class LinkedList
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+
+      until current.next.nil?
+        current = current.next
+      end
+
+      return current.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
