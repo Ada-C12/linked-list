@@ -42,13 +42,36 @@ class LinkedList
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+      max = 0
+      until current.nil?
+        if current.data > max
+          max = current.data
+        end
+        current = current.next
+      end
+
+      return max
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+      min = current.data
+
+      until current.nil?
+        if current.data < min
+          min = current.data
+        end
+        current = current.next          
+      end
+
+      return min
     end
 
 
@@ -70,23 +93,70 @@ class LinkedList
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      raise NotImplementedError
+      # raise NotImplementedError
+      length = self.length
+      if index > length
+        return nil
+      end
+
+      current = @head
+
+      index.times do 
+        current = current.next
+      end
+
+      return current.data
     end
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      length = self.length
+      values = []
+
+      current = @head
+      length.time do
+        values << current.data
+        current = current.next
+      end
     end
 
     # method to delete the first node found with specified value
     def delete(value)
-      raise NotImplementedError
+      current = @head
+      previous = nil
+
+      return nil if current.nil?
+
+      until current.data == value
+        return nil if current.nil?
+        previous = current
+        current = current.next
+      end
+
+      if previous == nil
+        @head = current.next
+      else
+        previous.next = current.next
+      end
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
-      raise NotImplementedError
+      return if @head.nil?
+
+      current = @head
+      previous = nil
+  
+      until current.next.nil?
+        temp = current.next
+        current.next = previous
+        previous = current
+        current = temp
+      end
+  
+      current.next = previous
+      @head = current
     end
 
 
@@ -99,7 +169,22 @@ class LinkedList
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
     def find_nth_from_end(n)
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+      n_ahead = @head
+  
+      n.times do
+        return if n_ahead.next.nil?
+        n_ahead = n_ahead.next
+      end
+  
+      until n_ahead.next.nil?
+        current = current.next
+        n_ahead = n_ahead.next
+      end
+  
+      return current.data
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -123,13 +208,42 @@ class LinkedList
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
       # raise NotImplementedError
+      # length = self.length
+      new_node = Node.new(value)
+
+      current = @head
+      if current.nil?
+        return @head = new_node
+      end
       
+      until current.next.nil?
+        current = current.next
+      end
+
+      current.next = new_node
+
+      # if current.nil?
+      #   @head = new_node
+      # else
+      #   current.next = new_node
+      # end
+
     end
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+      # raise NotImplementedError
+      # length = self.length
+      
+      return nil if @head.nil?
+
+      current = @head
+      until current.next == nil
+        current = current.next
+      end
+    
+      return current.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
