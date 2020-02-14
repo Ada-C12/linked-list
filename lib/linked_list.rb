@@ -193,7 +193,18 @@ class LinkedList
     # linked list links to a node already visited.
     # returns true if a cycle is found, false otherwise.
     def has_cycle
-      raise NotImplementedError
+      slow = @head
+      fast = @head
+
+      until fast.nil?
+        slow = slow.next
+        fast = fast.next
+        fast = fast.next
+        if slow == fast
+          return true
+        end
+      end
+      return false
     end
 
     # Additional Exercises 
@@ -239,7 +250,22 @@ class LinkedList
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
     def insert_ascending(value)
-      raise NotImplementedError
+      current = @head
+
+      if current.nil?
+        return @head = Node.new(value)
+      end
+
+      until current.nil?
+        if value >= current.data && value < current.next.data
+          new_node = Node.new(value, current.next)
+          current.next = new_node
+          return
+        else
+          current = current.next
+        end
+      end
+      current = Node.new(value)
     end
 
     # Helper method for tests
