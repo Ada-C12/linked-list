@@ -137,6 +137,7 @@ class LinkedList
   # find the nth node from the end and return its value
   # assume indexing starts at 0 while counting to n
   def find_nth_from_end(n)
+    return nil if @head.nil?
     current = @head
     n_ahead = @head
     length = 0
