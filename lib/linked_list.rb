@@ -76,9 +76,7 @@ class LinkedList
 
 
     # method that returns the length of the singly linked list
-    def length
-      # raise NotImplementedError
-      
+    def length      
       current = @head
       counter = 0
       until current.nil?
@@ -191,7 +189,19 @@ class LinkedList
     # linked list links to a node already visited.
     # returns true if a cycle is found, false otherwise.
     def has_cycle
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      fast = @head
+      slow = @head
+
+      until fast.nil? || fast.next.nil?
+        fast = fast.next.next
+        slow = slow.next
+        if fast == slow
+          return true
+        end
+      end
+      return false
     end
 
 
@@ -221,13 +231,6 @@ class LinkedList
       end
 
       current.next = new_node
-
-      # if current.nil?
-      #   @head = new_node
-      # else
-      #   current.next = new_node
-      # end
-
     end
 
     # method that returns the value of the last node in the linked list
@@ -249,7 +252,21 @@ class LinkedList
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
     def insert_ascending(value)
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+      
+      until current.nil?
+        if value > current.data && value <= current.next.data
+          new_node = Node.new(value, current.next)
+          current.next = new_node
+          return
+        else
+          current = current.next
+        end
+      end
+
+      return current = Node.new(value)
     end
 
     # Helper method for tests
