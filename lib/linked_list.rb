@@ -41,6 +41,8 @@ class LinkedList
 
     # method to return the max value in the linked list
     # returns the data value and not the node
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def find_max
       return nil if @head.nil?
 
@@ -57,6 +59,8 @@ class LinkedList
 
     # method to return the min value in the linked list
     # returns the data value and not the node
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def find_min
       return nil if @head.nil?
 
@@ -73,6 +77,8 @@ class LinkedList
 
 
     # method that returns the length of the singly linked list
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def length
       length = 0
       return length if @head.nil?
@@ -88,20 +94,24 @@ class LinkedList
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def get_at_index(index)
       return nil if @head.nil?
 
       current = @head
-      i = 0
+      count = 0
       until current.nil? do
-        return current.data if i == index 
+        return current.data if count == index 
         current = current.next
-        i += 1
+        count += 1
       end
       return nil
     end
 
     # method to print all the values in the linked list
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def visit
       return nil if @head.nil?
 
@@ -116,6 +126,8 @@ class LinkedList
     end
 
     # method to delete the first node found with specified value
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def delete(value)
       return nil if @head.nil?
 
@@ -124,8 +136,12 @@ class LinkedList
 
       until current.nil? do
         if current.data == value
-          previous.next = current.next
-          break
+          if previous.nil?
+            @head = current.next
+          else
+            previous.next = current.next
+          end
+          return
         end
         previous = current
         current = current.next
@@ -134,6 +150,8 @@ class LinkedList
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def reverse
       return nil if @head.nil?
 
