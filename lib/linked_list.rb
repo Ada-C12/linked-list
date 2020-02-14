@@ -20,18 +20,30 @@ class LinkedList
     # insert the new node at the beginning of the linked list
 
     def add_first(value)
-      if @head = nil
-        @head = value
+      if @head == nil
+        @head = Node.new(value)
+      else 
+        old_head = @head
+        @head = Node.new(value, old_head)
       end
-      old_head = @head
-      new_node = Node.new(value)
-      @head = new_node 
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
-      # raise NotImplementedError
+      if @head.nil?
+        return false
+      end
+      current = @head
+      until current.nil?
+        if (current.data == value) 
+          return true 
+        else
+          current = current.next
+        end
+      end
+
+      return false
     end
 
     # method to return the max value in the linked list
@@ -49,7 +61,20 @@ class LinkedList
 
     # method that returns the length of the singly linked list
     def length
-      # raise NotImplementedError
+      length = 0
+      
+      if @head.nil?
+        return length
+      end
+
+      current = @head
+
+      until current.nil?
+        length += 1
+        current = current.next
+      end
+      
+      return length
     end
 
     # method that returns the value at a given index in the linked list
@@ -100,10 +125,10 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      # raise NotImplementedError
       if @head.nil?
         return nil
       end
+
       current = @head
       return @head.data
     end
