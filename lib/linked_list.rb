@@ -57,7 +57,7 @@ class LinkedList
     current = @head
     return nil if current.nil?
     min = current.data
-
+    
     until current.nil?
       if current.data < min
         min = current.data
@@ -98,7 +98,12 @@ class LinkedList
   
   # method to print all the values in the linked list
   def visit
-    raise NotImplementedError
+    current = @head
+    return nil if current.nil?
+    until current.nil?
+      puts current
+      current = current.next
+    end
   end
   
   # method to delete the first node found with specified value
@@ -109,7 +114,17 @@ class LinkedList
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
   def reverse
-    raise NotImplementedError
+    return nil if @head.nil?
+    current = @head
+    previous = nil
+    until current.next.nil?
+      temp = current.next
+      current.next = previous
+      previous = current
+      current = temp
+    end
+    current.next = previous
+    @head = current
   end
   
   
@@ -122,7 +137,19 @@ class LinkedList
   # find the nth node from the end and return its value
   # assume indexing starts at 0 while counting to n
   def find_nth_from_end(n)
-    raise NotImplementedError
+    current = @head
+    n_ahead = @head
+    length = 0
+    until current.next.nil?
+      length += 1
+      current = current.next
+    end
+    return nil if n > length
+    current = @head
+    (length - n).times do
+      current = current.next
+    end
+    return current.data
   end
   
   # checks if the linked list has a cycle. A cycle exists if any node in the
