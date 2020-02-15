@@ -17,6 +17,8 @@ class LinkedList
 
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
+    # Time: O(1)
+    # Space: O(1)
     def add_first(value)
       new_node = Node.new(value)
       new_node.next = @head
@@ -25,6 +27,8 @@ class LinkedList
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
+    # Time: O(n) - you might have to check all nodes
+    # Space: O(1)
     def search(value)
       current = @head
 
@@ -38,6 +42,8 @@ class LinkedList
 
     # method to return the max value in the linked list
     # returns the data value and not the node
+    # Time: O(n) - n is the length of the list
+    # Space: O(1)
     def find_max
       return nil if @head.nil?
 
@@ -56,6 +62,8 @@ class LinkedList
 
     # method to return the min value in the linked list
     # returns the data value and not the node
+    # Time: O(n) - n is the length of the list
+    # Space: O(1)
     def find_min
       return nil if @head.nil?
 
@@ -73,6 +81,8 @@ class LinkedList
     end
 
     # method that returns the length of the singly linked list
+    # Time: O(n) - n is the length of the list
+    # Space: O(1)
     def length
       length = 0
       return length if @head.nil?
@@ -90,6 +100,8 @@ class LinkedList
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
+    # Time: O(n) - n is the length of the list
+    # Space: O(1)
     def get_at_index(index)
       count = 0
 
@@ -105,16 +117,20 @@ class LinkedList
     end
 
     # method to print all the values in the linked list
+    # Time: O(n) - n is the length of the list
+    # Space: O(1)
     def visit
       current = @head
       
       until current.nil?
-        puts current.data
+        print "#{current.data} "
         current = current.next
       end
     end
 
     # method to delete the first node found with specified value
+    # Time: O(n) - n is the length of the list
+    # Space: O(1)
     def delete(value)
       return nil if @head.nil?
       
@@ -135,6 +151,8 @@ class LinkedList
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
+    # Time: O(n) - n is the length of the list
+    # Space: O(1)
     def reverse
       return nil if @head.nil?
 
@@ -162,6 +180,8 @@ class LinkedList
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
+    # Time: O(n) - n is the length of the list
+    # Space: O(1)
     def find_nth_from_end(n)
       return nil if @head.nil?
 
