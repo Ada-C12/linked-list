@@ -73,12 +73,20 @@ class LinkedList
 
   # method to print all the values in the linked list
   def visit
-    raise NotImplementedError
+    self.map {|x| puts x}
   end
 
   # method to delete the first node found with specified value
-  def delete(value)
-    raise NotImplementedError
+  def delete(value, current=@head)
+    return unless current
+    return @head = @head.next if @head.data == value
+
+    if current.next.data == value
+      current.next = current.next.next
+      return
+    end
+
+    delete(value, current.next)
   end
 
   # method to reverse the singly linked list
