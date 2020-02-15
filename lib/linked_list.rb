@@ -111,6 +111,7 @@ class LinkedList
       until current.nil?
         puts current.data
         current = current.next
+      end
     end
 
     # method to delete the first node found with specified value
