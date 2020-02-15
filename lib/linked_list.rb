@@ -1,4 +1,3 @@
-
 # Defines a node in the singly linked list
 class Node
   attr_reader :data # allow external entities to read value but not write
@@ -76,7 +75,6 @@ class LinkedList
     # method that returns the length of the singly linked list
     def length
       length = 0
-
       return length if @head.nil?
 
       current = @head
@@ -93,12 +91,26 @@ class LinkedList
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      raise NotImplementedError
+      count = 0
+
+      current = @head
+
+      until count == index
+        return nil if current.nil?
+        current = current.next
+        count += 1
+      end
+
+      return current.data
     end
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      current = @head
+      
+      until current.nil?
+        puts current.data
+        current = current.next
     end
 
     # method to delete the first node found with specified value
@@ -112,7 +124,6 @@ class LinkedList
       raise NotImplementedError
     end
 
-
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
     def find_middle_value
@@ -122,7 +133,22 @@ class LinkedList
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
     def find_nth_from_end(n)
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+      k_ahead = @head
+    
+      n.times do
+        return if k_ahead.next.nil?
+        k_ahead = k_ahead.next
+      end
+    
+      until k_ahead.next.nil?
+        current = current.next
+        k_ahead = k_ahead.next
+      end
+    
+      return current.data
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
