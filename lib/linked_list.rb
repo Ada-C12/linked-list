@@ -16,13 +16,17 @@ class LinkedList
       @head = nil # keep the head private. Not accessible outside this class
     end
 
+    # Time Complexity: O(1) because the algorithm takes the same amount of time with any linked list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      next_node = Node.new(value, @head)
-      @head = next_node
+      new_node = Node.new(value, @head)
+      @head = new_node
     end
 
+    # Time Complexity: O(n) in worst case the search will iterate through the entire list to find the value, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
@@ -37,6 +41,8 @@ class LinkedList
       return false
     end
 
+    # Time Complexity: O(n) the method must search each value of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
@@ -54,6 +60,8 @@ class LinkedList
       return max
     end
 
+    # Time Complexity: O(n) the method must search each value of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
@@ -71,6 +79,8 @@ class LinkedList
       return min
     end
 
+    # Time Complexity: O(n) the method must search each value of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method that returns the length of the singly linked list
     def length
       return 0 if @head.nil?
@@ -86,6 +96,8 @@ class LinkedList
       return count
     end
 
+    # Time Complexity: O(n) in worst case the search will iterate through the entire list to find the value, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
@@ -104,6 +116,8 @@ class LinkedList
 
     end
 
+    # Time Complexity: O(n) the method must search each value of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method to print all the values in the linked list
     def visit
       return 0 if @head.nil?
@@ -116,6 +130,8 @@ class LinkedList
       end
     end
 
+    # Time Complexity: O(n) the method must visit each node of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method to delete the first node found with specified value
     def delete(value)
       return 0 if @head.nil?
@@ -137,6 +153,8 @@ class LinkedList
       prev.next = current.next
     end
 
+    # Time Complexity: O(n) the method must visit each node of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
@@ -160,6 +178,8 @@ class LinkedList
 
 
     ## Advanced Exercises
+    # Time Complexity: O(n) the method must visit each node of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # returns the value at the middle element in the singly linked list
     def find_middle_value
       return false if @head.nil? || @head.next.nil?
@@ -176,6 +196,8 @@ class LinkedList
       return slow.data
     end
 
+    # Time Complexity: O(n) the method must visit each node of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
     def find_nth_from_end(n)
@@ -196,6 +218,8 @@ class LinkedList
       return current.data
     end
 
+    # Time Complexity: O(n) the method must visit each node of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # checks if the linked list has a cycle. A cycle exists if any node in the
     # linked list links to a node already visited.
     # returns true if a cycle is found, false otherwise.
@@ -218,6 +242,8 @@ class LinkedList
 
 
     # Additional Exercises 
+    # Time Complexity: O(1) because the algorithm takes the same amount of time with any linked list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
@@ -226,6 +252,8 @@ class LinkedList
       return @head.data
     end
 
+    # Time Complexity: O(n) the method must visit each node of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
       if @head.nil?
@@ -244,6 +272,8 @@ class LinkedList
       return
     end
 
+    # Time Complexity: O(n) the method must visit each node of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
@@ -258,6 +288,8 @@ class LinkedList
       return current.data
     end
 
+    # Time Complexity: O(n) In the worst case the method must visit each node of the list, so the method is dependant on list size
+    # Space Complexity: O(1) because the amount of values stored does not increase with linked list size
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
     def insert_ascending(value)
