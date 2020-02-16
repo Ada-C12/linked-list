@@ -175,7 +175,17 @@ class LinkedList
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
     def find_middle_value
-      raise NotImplementedError
+      return if @head.nil?
+
+      current = @head
+      tail = @head.next
+
+      until tail.nil? || tail.next.nil?
+        current = current.next
+        tail = tail.next.next
+      end
+
+      return current.data
     end
 
     # find the nth node from the end and return its value
