@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/skip_dsl'
 require 'minitest/pride'
+require 'pry'
 
 require_relative 'test_helper'
 
@@ -52,7 +53,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "length" do
+    describe "length" do
         it "will return 0 for an empty list" do
             expect(@list.length).must_equal 0
         end
@@ -67,7 +68,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "addLast & getLast" do
+    describe "addLast & getLast" do
         it "will add to the front if the list is empty" do
             @list.add_last(1)
             expect(@list.get_first).must_equal 1

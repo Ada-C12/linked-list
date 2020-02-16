@@ -55,19 +55,59 @@ class LinkedList
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      
+      if @head.nil?
+        return nil 
+      end
+
+      max = @head.data
+      current = @head
+
+      until current.next.nil?
+        if current.data > max 
+          max = current.data
+        end
+        current = current.next
+      end
+
+      return max
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
-      raise NotImplementedError
-    end
 
+      if @head.nil?
+        return nil 
+      end
+
+      min = @head.data
+      current = @head
+
+      until current.next.nil?
+        if current.data > min 
+          min = current.data
+        end
+        current = current.next
+      end
+
+      return min
+
+    end
 
     # method that returns the length of the singly linked list
     def length
-      raise NotImplementedError
+      if @head.nil?
+        return 0
+      else
+        length = 1
+        current = @head
+        until current.next.nil?
+          current = current.next
+          length += 1
+        end
+      return length
+      end
     end
 
     # method that returns the value at a given index in the linked list
@@ -115,13 +155,13 @@ class LinkedList
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      raise NotImplementedError
+
     end
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+
     end
 
     # method to insert a new node with specific data value, assuming the linked
