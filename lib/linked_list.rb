@@ -29,7 +29,7 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      # if the list is empty, head is nil?
+      # if the list is empty, head is nil
       if @head.nil?
         return nil
       else 
@@ -155,12 +155,40 @@ class LinkedList
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
+      
+      # if list is empty, insert the new value at the head
+      if @head.nil?
+        @head = Node.new(value, nil)
+        return @head
+      end 
+
+      # otherwise, traverse the list from start to last node ...
+      current = @head
+      until current.next.nil?
+        current = current.next
+      end
+
+      # ... and insert new node after last node
+      current.next = Node.new(value, nil)
 
     end
 
     # method that returns the value of the last node in the linked list
-    # returns nil if the linked list is empty
     def get_last
+      # return nil if the linked list is empty
+      if @head.nil?
+        return nil
+      end
+
+      # otherwise, go to end of list ...
+      current = @head
+      until current.next.nil?
+        # ... until 'current' is the last node ...
+        current = current.next
+      end
+
+      # ... and return data from last node
+      return current.data
 
     end
 
