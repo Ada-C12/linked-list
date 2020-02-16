@@ -238,6 +238,17 @@ describe LinkedList do
       expect(@list.find_middle_value).must_equal 3
     end
 
+    it "returns the middle value in a long odd numbered list" do
+      @list.add_last(1)
+      @list.add_last(3)
+      @list.add_last(5)
+      @list.add_last(7)
+      @list.add_last(9)
+      @list.add_last(11)
+      @list.add_last(13)
+      expect(@list.find_middle_value).must_equal 7
+    end
+
     it "returns the first middle value in an even numbered list" do
       @list.add_last(2)
       @list.add_last(4)
@@ -245,6 +256,17 @@ describe LinkedList do
       @list.add_last(8)
 
       expect(@list.find_middle_value).must_equal 4
+    end
+
+    it "returns the first middle value in a long even numbered list" do
+      @list.add_last(2)
+      @list.add_last(4)
+      @list.add_last(6)
+      @list.add_last(8)
+      @list.add_last(10)
+      @list.add_last(12)
+
+      expect(@list.find_middle_value).must_equal 6
     end
   end
 end
