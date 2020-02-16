@@ -269,4 +269,46 @@ describe LinkedList do
       expect(@list.find_middle_value).must_equal 6
     end
   end
+
+  describe "insert ascending" do
+    it "can insert into empty list" do
+      @list.insert_ascending(6)
+
+      expect(@list.get_first).must_equal 6
+      expect(@list.length).must_equal 1
+    end
+
+    it "can insert at beginning of list" do
+      @list.add_last(2)
+      @list.add_last(4)
+      @list.add_last(6)
+
+      @list.insert_ascending(1)
+
+      expect(@list.get_first).must_equal 1
+      expect(@list.length).must_equal 4
+    end
+
+    it "can insert in middle of list" do
+      @list.add_last(1)
+      @list.add_last(5)
+      @list.add_last(10)
+
+      @list.insert_ascending(3)
+
+      expect(@list.get_at_index(1)).must_equal 3
+      expect(@list.length).must_equal 4
+    end
+
+    it "can insert at end of list" do
+      @list.add_last(1)
+      @list.add_last(5)
+      @list.add_last(10)
+
+      @list.insert_ascending(12)
+
+      expect(@list.get_last).must_equal 12
+      expect(@list.length).must_equal 4
+    end
+  end
 end

@@ -174,6 +174,8 @@ class LinkedList
 
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
+    # Time: O(n) n is the length of the list
+    # Space: O(1)
     def find_middle_value
       return if @head.nil?
 
@@ -259,8 +261,29 @@ class LinkedList
 
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
+    # Time: O(n) - n is length of list
+    # Space: O(1) 
     def insert_ascending(value)
-      raise NotImplementedError
+      if @head.nil? || @head.data > value
+        new_node = Node.new(value)
+        new_node.next = @head
+        @head = new_node
+        return
+      end
+
+      current = @head
+
+      until current.next.nil?
+        if current.next.data > value
+          new_node = Node.new(value)
+          new_node.next = current.next
+          current.next = new_node
+          return
+        end
+        current = current.next
+      end
+
+      current.next = Node.new(value)
     end
 
     # Helper method for tests
