@@ -62,15 +62,11 @@ class LinkedList
       current = @head
       min = current.data
 
-      until current.next.nil?
-        if current.data < min
-          min = current.data
-        end
+      until current.nil?
+        min = current.data if current.data < min
 
         current = current.next
       end
-
-      min = current.data if current.data < min
 
       return min
     end
@@ -115,7 +111,7 @@ class LinkedList
       current = @head
 
       until current.nil?
-        puts current.data
+        puts "#{current.data}"
         current = current.next
       end
     end
@@ -265,7 +261,31 @@ class LinkedList
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
     def insert_ascending(value)
-      raise NotImplementedError
+      return nil if @head.nil? || @head.next.nil?
+
+      current = @head
+
+      if value < current.data
+        self.add_first(value)
+        return
+      end
+
+      until current.next.nil?
+        current_value = current.data
+        next_value = current.next.data
+
+        if (value > current_value && value < next_value)
+          new_node = Node.new(value, current.next)
+
+          current.next = new_node
+          return
+        end
+
+        current = current.next
+      end
+
+      self.add_last(value)
+      return
     end
 
     # Helper method for tests
