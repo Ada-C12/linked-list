@@ -202,4 +202,28 @@ describe LinkedList do
             expect(@list.find_nth_from_end(3)).must_equal 4
         end
     end
+
+    describe "find_middle_value" do
+      it 'can retrieve value at the middle of a linked list - even' do
+          count = 1
+
+          4.times do 
+            @list.add_first(count)
+            count += 1
+          end
+
+          expect(@list.find_middle_value).must_equal 2
+      end
+
+      it 'can retrieve value at the middle of a linked list - odd' do
+        count = 1
+
+        5.times do 
+          @list.add_first(count)
+          count += 1
+        end
+
+        expect(@list.find_middle_value).must_equal 3
+    end
+  end
 end

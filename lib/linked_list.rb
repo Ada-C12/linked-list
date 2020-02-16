@@ -19,7 +19,6 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-
       next_node = Node.new(value, @head)
       @head = next_node
     end
@@ -111,7 +110,14 @@ class LinkedList
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      return 0 if @head.nil?
+
+      current = @head
+
+      until current.nil?
+        puts current.data
+        current = current.next
+      end
     end
 
     # method to delete the first node found with specified value
@@ -160,7 +166,18 @@ class LinkedList
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
     def find_middle_value
-      raise NotImplementedError
+      return false if @head.nil? || @head.next.nil?
+
+      slow = @head
+      fast = @head.next
+
+      until fast.nil?
+        slow = slow.next
+        fast = fast.next
+        fast = fast.next unless fast.nil?
+      end
+
+      return slow.data
     end
 
     # find the nth node from the end and return its value
@@ -187,7 +204,20 @@ class LinkedList
     # linked list links to a node already visited.
     # returns true if a cycle is found, false otherwise.
     def has_cycle
-      raise NotImplementedError
+      return false if @head.nil? || @head.next.nil?
+
+      slow = @head
+      fast = @head
+
+      until fast.nil?
+        slow = slow.next
+        fast = fast.next
+        fast = fast.next unless fast.nil?
+
+        return true if fast == slow
+      end
+
+      return false
     end
 
 
@@ -221,7 +251,6 @@ class LinkedList
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-
       return nil if @head.nil?
 
       current = @head
