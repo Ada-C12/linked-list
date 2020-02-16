@@ -114,9 +114,6 @@ class LinkedList
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      # index of head is 0
-      # index = 0
-      # index.times do
 
       # determine length
       if @head.nil?
