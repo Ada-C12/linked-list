@@ -225,4 +225,72 @@ describe LinkedList do
             expect(@list.find_nth_from_end(3)).must_equal 4
         end
     end
+
+    describe "find_middle_value" do
+      it 'can retrieve value at the middle of a linked list - even' do
+          count = 1
+
+          4.times do 
+            @list.add_first(count)
+            count += 1
+          end
+
+          expect(@list.find_middle_value).must_equal 2
+      end
+
+      it 'can retrieve value at the middle of a linked list - odd' do
+        count = 1
+
+        5.times do 
+          @list.add_first(count)
+          count += 1
+        end
+
+        expect(@list.find_middle_value).must_equal 3
+    end
+
+    describe "insert ascending" do
+      it 'can insert at head if value is less than current values' do
+          value = 7
+
+          4.times do 
+            @list.add_first(value)
+            value -= 1
+          end
+
+          @list.insert_ascending(1)
+
+          expect(@list.get_first).must_equal 1
+      end
+
+      it 'can insert at tail is value is greater than current values' do
+        value = 7
+
+        4.times do 
+          @list.add_first(value)
+          value -= 1
+        end
+
+        @list.insert_ascending(19)
+
+        expect(@list.get_last).must_equal 19
+      end
+
+      it 'can insert in middle if value is between two current values' do
+        value = 7
+
+        4.times do 
+          @list.add_first(value)
+          value -= 1
+        end
+
+        @list.add_first(1)
+
+        expect(@list.length).must_equal 5
+        @list.insert_ascending(2)
+        expect(@list.get_at_index(1)).must_equal 2
+        expect(@list.length).must_equal 6
+      end
+    end
+  end
 end
