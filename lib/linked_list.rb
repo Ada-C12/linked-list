@@ -19,31 +19,68 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      raise NotImplementedError
+      new_first = Node.new(value, @head)
+      @head = new_first
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
-      raise NotImplementedError
+      current = @head 
+
+      until current == nil 
+        return true if current.data == value
+        current = current.next
+      end
+
+      return false
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      current = @head
+      max = @head
+
+      return nil if current.nil? 
+
+      while current != nil 
+        if current.data > max.data 
+          max = current 
+        end 
+        current = current.next
+      end 
+      return max.data
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
-      raise NotImplementedError
+      current = @head
+      min = @head 
+
+      return nil if current.nil? 
+
+      while current != nil 
+        if current.data < min.data 
+          min = current 
+        end 
+        current = current.next 
+      end 
+      return min.data 
     end
 
 
     # method that returns the length of the singly linked list
     def length
-      raise NotImplementedError
+      current = @head 
+      counter = 0 
+
+      while current != nil 
+        counter += 1 
+        current = current.next
+      end 
+      return counter 
     end
 
     # method that returns the value at a given index in the linked list
@@ -79,7 +116,26 @@ class LinkedList
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
     def find_nth_from_end(n)
-      raise NotImplementedError
+      current = @head 
+      n_ahead = @head 
+
+      return nil if current.nil? 
+
+      #advance pointer n times, until n_ahead is n times ahead 
+      n.times do 
+        return nil if n_ahead.next.nil? 
+        n_ahead = n_ahead.next 
+      end 
+
+      #advance both until n_ahead's next value is nil 
+      #then we'll have reached the length - n position, because that is where the current variable is 
+      until n_ahead.next.nil?
+        return current.data if current.next.nil?
+        current = current.next
+        n_ahead = n_ahead.next 
+      end 
+
+      return current.data 
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -99,7 +155,18 @@ class LinkedList
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      raise NotImplementedError
+      current = @head 
+
+      if current.nil?
+        @head = Node.new(value)
+        return @head 
+      end 
+
+      until current.next.nil?
+        current = current.next 
+      end 
+
+      current.next = Node.new(value)
     end
 
     # method that returns the value of the last node in the linked list
