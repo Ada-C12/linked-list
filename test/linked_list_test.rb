@@ -91,7 +91,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe 'get_at_index' do
+    describe 'get_at_index' do
         it 'returns nil if the index is outside the bounds of the list' do
             expect(@list.get_at_index(3)).must_be_nil
         end

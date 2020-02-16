@@ -114,7 +114,34 @@ class LinkedList
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      raise NotImplementedError
+      # index of head is 0
+      # index = 0
+      # index.times do
+
+      # determine length
+      if @head.nil?
+        return nil
+      else
+        length = 1
+        current = @head
+        until current.next.nil?
+          current = current.next
+          length += 1
+        end
+      end
+
+      # return nil if index reference is outside of list length
+      if (index + 1) > length
+        return nil
+      end
+
+      # return the value at given index
+      current = @head
+      index.times do
+        current = current.next
+      end
+
+      return current.data
     end
 
     # method to print all the values in the linked list
