@@ -47,8 +47,9 @@ class LinkedList
       until current.nil?
         if current.data > max
           max = current.data
+        else
+          current = current.next
         end
-        current = current.next
       end
 
       return max
@@ -65,8 +66,9 @@ class LinkedList
       until current.nil?
         if current.data < min
           min = current.data
+        else
+          current = current.next
         end
-        current = current.next
       end
 
       return min
@@ -95,7 +97,7 @@ class LinkedList
       if current.nil?
         return nil
       elsif index > 0
-        (index).times do 
+        index.times do 
           current = current.next
         end
       end
@@ -105,7 +107,12 @@ class LinkedList
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      current = @head
+
+      until current.nil?
+        puts current.data
+        current = current.next
+      end
     end
 
     # method to delete the first node found with specified value
@@ -150,8 +157,16 @@ class LinkedList
 
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
+    ### if the list has an even number of values, returns the value of
+    ### the first of the two middle elements
     def find_middle_value
-      raise NotImplementedError
+      length = self.length
+      mid_index = length / 2
+      if length.even?
+        mid_index -= 1
+      end
+      
+      return self.get_at_index(mid_index)
     end
 
     # find the nth node from the end and return its value
@@ -179,7 +194,21 @@ class LinkedList
     # linked list links to a node already visited.
     # returns true if a cycle is found, false otherwise.
     def has_cycle
-      raise NotImplementedError
+      return false if @head.nil? || @head.next.nil?
+
+      slow = @head.next
+      fast = @head.next.next
+
+      while !fast.nil? && !fast.next.nil?
+        if fast == slow
+          return true
+        else
+          slow = slow.next
+          fast = fast.next.next
+        end
+      end
+
+      return false
     end
 
 
@@ -224,7 +253,27 @@ class LinkedList
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
     def insert_ascending(value)
-      raise NotImplementedError
+      if @head.nil?
+        @list.add_first(value)
+      else
+        current = @head
+        previous = nil
+
+        until current.nil?
+          if current.data > value
+            if current == @head
+              return self.add_first(value)
+            else
+              return previous.next = Node.new(value, current)
+            end
+          else
+            previous = current
+            current = current.next
+          end
+        end
+        # adds value to end of linked list if it is larger than the last node
+        previous.next = Node.new(value)
+      end
     end
 
     # Helper method for tests
