@@ -68,7 +68,7 @@ describe LinkedList do
         end
     end
 
-    describe "addLast & getLast" do
+    describe "add_last & get_last" do
         it "will add to the front if the list is empty" do
             @list.add_last(1)
             expect(@list.get_first).must_equal 1
@@ -131,7 +131,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "delete" do
+    describe "delete" do
         it "delete from empty linked list is a no-op" do
             expect(@list.length).must_equal 0
             @list.delete(4)
@@ -145,7 +145,7 @@ describe LinkedList do
             @list.add_first(3)
             @list.add_first(2)
 
-            # delete fist node (requires updating head)
+            # delete first node (requires updating head)
             @list.delete(2)
             expect(@list.get_first).must_equal 3
             expect(@list.length).must_equal 4
