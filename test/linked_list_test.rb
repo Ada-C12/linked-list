@@ -1,11 +1,11 @@
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
+# require 'minitest/autorun'
+# require 'minitest/reporters'
+# require 'minitest/skip_dsl'
 
 require_relative 'test_helper'
 
 
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe LinkedList do
     # Arrange
@@ -51,7 +51,8 @@ describe LinkedList do
         end
     end
 
-    describe "search" do
+    
+   describe "search" do
         it "can find an element" do
             @list = LinkedList.new
             @list.add_first(3)
@@ -211,7 +212,7 @@ describe LinkedList do
         end
     end
 
-    describe "reverse" do
+    describe "reverse" do 
         it 'can retrieve an item at index n from the end in the list' do
             @list.add_first(4)
             @list.add_first(3)
