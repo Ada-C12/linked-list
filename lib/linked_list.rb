@@ -104,15 +104,19 @@ class LinkedList
     # method to delete the first node found with specified value
     def delete(value)
       current = @head
+      previous = nil
 
       return nil if current.nil?
-      until current.nil?
-        to_delete = current if current.data == value
+      until current.data == value
+        previous = current
         current = current.next
       end
 
-      to_delete.previous.next = to_delete.next
-      to_delete.next.previous = to_delete.previous
+      if previous.nil?
+        @head = current.next
+      else
+        previous.next = current.next
+      end
     end
 
     # method to reverse the singly linked list
@@ -183,7 +187,21 @@ class LinkedList
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
     def insert_ascending(value)
-      raise NotImplementedError
+      current = @head
+
+      if current.nil?
+        @head = Node.new(value)
+      end
+
+      until current.nil?        
+        if value.data > last.data && value.data < current.data
+          new_node = Node.new(value, current.next)
+          current.next = new_node
+          return
+        else
+          current = current.next
+        end
+      end
     end
 
     # Helper method for tests
