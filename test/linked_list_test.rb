@@ -190,7 +190,18 @@ describe LinkedList do
         end
     end
 
-    xdescribe "reverse" do
+describe "reverse" do
+        it 'returns nil if list is empty' do
+            expect(@list.reverse).must_be_nil
+        end
+
+        it 'returns correct value is list has only one node' do
+            @list.add_first(5)
+            @list.reverse
+            
+            expect(@list.get_first).must_equal 5
+        end
+
         it 'can retrieve an item at index n from the end in the list' do
             @list.add_first(4)
             @list.add_first(3)
