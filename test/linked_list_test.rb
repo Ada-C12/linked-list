@@ -1,7 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/skip_dsl'
-
 require_relative 'test_helper'
 
 
@@ -15,7 +14,6 @@ describe LinkedList do
 
   describe 'initialize' do
     it 'can be created' do
-
       # Assert
       expect(@list).must_be_kind_of LinkedList
     end
@@ -230,6 +228,12 @@ describe LinkedList do
       assert_nil @list.find_middle_value
     end
 
+    it "returns the first value if the list only has one value" do
+      @list.add_last(6)
+
+      expect(@list.find_middle_value).must_equal 6
+    end
+
     it "returns the middle value in an odd numbered list" do
       @list.add_last(1)
       @list.add_last(3)
@@ -309,6 +313,37 @@ describe LinkedList do
 
       expect(@list.get_last).must_equal 12
       expect(@list.length).must_equal 4
+    end
+  end
+
+  describe "has cycle" do
+    it "can detect a cycle" do
+      @list.add_last(1)
+      @list.add_last(2)
+      @list.add_last(3)
+
+      @list.create_cycle
+
+      expect(@list.has_cycle).must_equal true
+    end
+
+    it "returns false if list is empty" do
+      expect(@list.has_cycle).must_equal false
+    end
+
+    it "returns false if there is only one element in list" do
+      @list.add_last(5)
+
+      expect(@list.has_cycle).must_equal false
+    end
+
+    it "returns false if there is no cycle" do
+      @list.add_last(2)
+      @list.add_last(4)
+      @list.add_last(6)
+      @list.add_last(8)
+
+      expect(@list.has_cycle).must_equal false
     end
   end
 end
