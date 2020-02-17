@@ -29,7 +29,6 @@ class LinkedList
 
       until current.nil?
         return true if current.data == value
-
         current = current.next
       end
       return false
@@ -38,19 +37,35 @@ class LinkedList
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      current = @head
+      max = current
+      return nil if current.nil?
+
+      until current.nil?
+        max = current if current.data > max.data
+        current = current.next
+      end
+      return max.data
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
-      raise NotImplementedError
+      current = @head
+      min = current
+      return nil if current.nil?
+
+      until current.nil?
+        min = current if current.data < min.data
+        current = current.next
+      end
+      return min.data
     end
 
 
     # method that returns the length of the singly linked list
     def length
-      raise NotImplementedError
+
     end
 
     # method that returns the value at a given index in the linked list
