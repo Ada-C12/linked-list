@@ -51,6 +51,35 @@ describe LinkedList do
         end
     end
 
+    describe "search" do 
+        it "will return false for an empty list" do
+            list = LinkedList.new
+            result = list.search(4)
+            
+            expect(result).must_equal false
+        end
+
+        it "will return false if value not found" do
+            list = LinkedList.new
+            list.add_first(4)
+            list.add_first(2)
+            list.add_first(10)
+
+            result = list.search(8)
+            expect(result).must_equal false
+        end
+
+        it "will return true if value found" do
+            list = LinkedList.new
+            list.add_first(4)
+            list.add_first(2)
+            list.add_first(10)
+ 
+            result = list.search(4)
+            expect(result).must_equal true
+        end 
+    end
+
     describe "length" do
         it "will return 0 for an empty list" do
             expect(@list.length).must_equal 0
@@ -86,6 +115,24 @@ describe LinkedList do
             expect(@list.get_first).must_equal 2
             expect(@list.get_last).must_equal 4
             expect(@list.length).must_equal 3
+        end
+    end
+
+    describe 'visit' do
+        it 'returns nil if list is empty' do
+            list = LinkedList.new
+            expect(list.visit).must_be_nil
+        end
+
+        it 'prints out all values of the linked list' do
+            list = LinkedList.new
+            count = 0
+            5.times do
+                list.add_first(count)
+                count += 1
+            end
+
+            assert_output(/4321/) {list.visit}
         end
     end
 
@@ -143,7 +190,7 @@ describe LinkedList do
             @list.add_first(3)
             @list.add_first(2)
 
-            # delete fist node (requires updating head)
+            # delete first node (requires updating head)
             @list.delete(2)
             expect(@list.get_first).must_equal 3
             expect(@list.length).must_equal 4
@@ -159,7 +206,7 @@ describe LinkedList do
             expect(@list.find_max).must_equal 9
             expect(@list.find_min).must_equal 3
 
-            # delete fist node (requires updating head)
+            # delete first node (requires updating head)
             @list.delete(4)
             expect(@list.get_first).must_equal 3
             expect(@list.length).must_equal 2
@@ -185,6 +232,37 @@ describe LinkedList do
             expect(@list.find_nth_from_end(2)).must_equal 3
             expect(@list.find_nth_from_end(3)).must_equal 4
             expect(@list.find_nth_from_end(4)).must_be_nil
+        end
+    end
+
+    describe 'find_middle_value' do
+        it 'will return nil if list is empty' do
+            list = LinkedList.new
+            expect(list.find_middle_value).must_be_nil
+        end
+        
+        it 'can retreive the middle node when the list is odd' do
+            list = LinkedList.new
+            list.add_first(12)
+            list.add_first(10)
+            list.add_first(8)
+            list.add_first(6)
+            list.add_first(4)
+
+            expect(list.find_middle_value).must_equal 8
+        end
+
+        it 'can retrieve the middle node when the list is even' do
+            list = LinkedList.new
+            
+            list.add_first(14)
+            list.add_first(12)
+            list.add_first(10)
+            list.add_first(8)
+            list.add_first(6)
+            list.add_first(4)
+
+            expect(list.find_middle_value).must_equal 8
         end
     end
 
