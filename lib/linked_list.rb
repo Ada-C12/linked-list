@@ -174,22 +174,6 @@ class LinkedList
       current = current.next
     end
 
-  
-
-    # # otherwise, traverse all nodes 
-    # until current.nil?  
-    #   # if next node's value matches value sought ...
-    #   if current.next.data == value
-    #     # ... previous node points to node after the next node
-    #     next_node = current.next 
-    #     node_after = next_node.next
-    #     current.next = node_after
-    #   end
-    #   current = current.next
-    # end
-
-    # if value isn't in the list
-
   end
 
 
