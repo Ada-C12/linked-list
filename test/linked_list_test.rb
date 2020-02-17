@@ -169,7 +169,7 @@ describe LinkedList do
     end
   end
   
-  xdescribe "nth_from_the_end" do
+  describe "nth_from_the_end" do
     it 'returns nil if n is outside the bounds of the list' do
       expect(@list.find_nth_from_end(3)).must_be_nil
     end
@@ -188,7 +188,7 @@ describe LinkedList do
     end
   end
   
-  xdescribe "reverse" do
+  describe "reverse" do
     it 'can retrieve an item at index n from the end in the list' do
       @list.add_first(4)
       @list.add_first(3)

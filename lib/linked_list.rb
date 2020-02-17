@@ -140,19 +140,47 @@ class LinkedList
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
   def reverse
-    raise NotImplementedError
+    previous = nil
+    temp = nil
+    
+    return nil if @head == nil
+    current = @head
+    
+    
+    while current do
+      temp = current.next
+      current.next = previous
+      
+      previous = current
+      current = temp
+    end
+    
+    @head = previous
   end
-  
   
   ## Advanced Exercises
   # returns the value at the middle element in the singly linked list
   def find_middle_value
-    raise NotImplementedError
+    current = @head
+    count = 0
+    
+    until current.next == nil
+      current = current.next
+      count += 1
+    end
+    
+    current = @head
+    (count/2).times do 
+      current = current.next
+    end
+    
+    return current.data
   end
   
   # find the nth node from the end and return its value
   # assume indexing starts at 0 while counting to n
   def find_nth_from_end(n)
+    return nil if @head == nil
     current = @head;
     check = @head;
     
@@ -162,11 +190,11 @@ class LinkedList
         if i < n - 1
           return nil;
         end
-        return current.data;
+        return nil;
       end
     end
     
-    while check.next != nil do
+    until check.next == nil do
       check = check.next;
       current = current.next;
     end
@@ -178,7 +206,23 @@ class LinkedList
   # linked list links to a node already visited.
   # returns true if a cycle is found, false otherwise.
   def has_cycle
-    raise NotImplementedError
+    return nil if @head == nil
+    
+    slow = @head
+    fast = @head
+    
+    while fast.nil && fast.next.nil
+      slow = slow.next
+      
+      fast = fast.next
+      fast = fast.next
+      
+      if slow == fast
+        return true
+      end
+    end
+    
+    return false
   end
   
   
@@ -222,7 +266,23 @@ class LinkedList
   # method to insert a new node with specific data value, assuming the linked
   # list is sorted in ascending order
   def insert_ascending(value)
-    raise NotImplementedError
+    return false if @head == nil
+    previous = nil
+    current = @head
+    
+    while current do
+      if current.data > value
+        break
+      else
+        previous = current
+        current = current.next
+      end
+    end
+    
+    new_node = Node.new(value, current)
+    previous.next = new_node
+    
+    
   end
   
   # Helper method for tests
@@ -241,21 +301,6 @@ class LinkedList
   end
 end
 
-linked = LinkedList.new
-linked.add_first(1)
-linked.add_first(2)
-linked.add_first(3)
-linked.add_first(4)
-# p(linked)
-# puts(linked.search(5))
-# puts(linked.search(7))
-# puts(linked.find_max())
-# puts(linked.find_min())
-# puts(linked.visit())
-# puts(linked.get_first)
-# linked.delete(2)
-# puts(linked.visit())
-
 list = LinkedList.new
 list.add_last(9)
 list.add_last(10)
@@ -264,11 +309,21 @@ list.add_first(3)
 list.add_first(2)
 puts(list.visit())
 
-list.delete(2)
-puts(list.visit())
+# list.delete(2)
+# puts(list.visit())
 
-list.delete(10)
-puts(list.visit())
+# list.delete(10)
+# puts(list.visit())
 
 # list.delete(4)
 # puts(list.visit())
+
+# puts(list.find_nth_from_end(5))
+
+# list.reverse()
+# puts(list.visit())
+
+# puts(list.find_middle_value())
+
+list.insert_ascending(4)
+puts(list.visit())
