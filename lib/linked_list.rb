@@ -108,11 +108,14 @@ class LinkedList
     # method to print all the values in the linked list
     def visit
       current = @head
+      all_values = ""
 
       until current.nil?
-        print(current.data)
+        all_values += "#{current.data} "
         current = current.next
       end
+
+      return all_values
     end
 
     # method to delete the first node found with specified value
@@ -140,6 +143,7 @@ class LinkedList
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
       return if @head.nil?
+
       current = @head
       previous = nil
       temp = nil
@@ -273,3 +277,4 @@ class LinkedList
       current.next = @head # make the last node link to first node
     end
 end
+
