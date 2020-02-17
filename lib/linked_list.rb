@@ -192,11 +192,11 @@ class LinkedList
     until current == nil
       # move temp forward one node
       temp = current.next
-      # make next node point to previous
+      # make next node point to previous / reverse the direction of the arrow
       current.next = previous
       # make previous current node
       previous = current
-      # move current forward two places to 'temp'
+      # move current forward one node to 'temp'
       current = temp
     end
     # make formerly last node the head
@@ -207,7 +207,25 @@ class LinkedList
   ## Advanced Exercises
   # returns the value at the middle element in the singly linked list
   def find_middle_value
-    raise NotImplementedError
+
+    # if list is empty
+    return nil if @head.nil?
+    # if list has only one node
+    return @head.data if @head.next.nil?
+
+    # if list has multiple nodes, initialize a slow pointer and a fast pointer
+    slow = @head
+    fast = @head
+
+    # traverse the list moving slow forward one node and fast two nodes until fast reaches last (or second-to-last) node
+    until fast.next.nil? || fast.next.next.nil?
+      slow = slow.next
+      fast = fast.next.next
+    end
+
+    # when fast is at the last node, slow is at the middle node
+    return slow.data
+
   end
 
   # find the nth node from the end and return its value
