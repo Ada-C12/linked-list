@@ -65,14 +65,30 @@ class LinkedList
 
     # method that returns the length of the singly linked list
     def length
-
+      current = @head
+      length = 0
+      return 0 if current.nil?
+        
+      until current.nil?
+        current = current.next
+        length += 1
+      end
+      return length
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      raise NotImplementedError
+      current = @head
+      current_index = 0
+        
+      index.times do |i|
+        return nil if current.nil?
+        current = current.next
+      end
+      
+      return current.data
     end
 
     # method to print all the values in the linked list
