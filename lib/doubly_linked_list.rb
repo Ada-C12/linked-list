@@ -1,5 +1,5 @@
 # Defines a node in the doubly linked list
-class Node
+class DoubleNode
   attr_reader :data # allow external entities to read value but not write
   attr_accessor :previous, :next # allow external entities to read or write previous or next node
 
@@ -21,8 +21,12 @@ class DoublyLinkedList
   # Time: O(1)
   # Space: O(1)
   def add_first(value)
-    new_node = Node.new(value, nil, @head)
-    @head.previous = new_node
+    new_node = DoubleNode.new(value, nil, @head)
+
+    if @head
+      @head.previous = new_node
+    end
+
     @head = new_node
   end
 
@@ -110,7 +114,7 @@ class DoublyLinkedList
   # Space: O(1)
   def add_last(value)
     if @head.nil?
-      return @head = Node.new(value)
+      return @head = DoubleNode.new(value)
     end
 
     current = @head
@@ -119,7 +123,23 @@ class DoublyLinkedList
       current = current.next
     end
 
-    new_node = Node.new(value, current, nil)
+    new_node = DoubleNode.new(value, current, nil)
     current.next = new_node      
+  end
+
+  # method that returns the value of the last node in the linked list
+  # returns nil if the linked list is empty
+  # Time: O(n)
+  # Space: O(1)
+  def get_last
+    return nil if @head.nil?
+
+    current = @head
+
+    until current.next.nil?
+      current = current.next
+    end
+
+    return current.data
   end
 end

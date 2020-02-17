@@ -179,7 +179,7 @@ describe LinkedList do
       expect(@list.find_max).must_equal 9
       expect(@list.find_min).must_equal 3
 
-      # delete fist node (requires updating head)
+      # delete first node (requires updating head)
       @list.delete(4)
       expect(@list.get_first).must_equal 3
       expect(@list.length).must_equal 2
@@ -225,7 +225,7 @@ describe LinkedList do
 
   describe "find middle value" do
     it "returns nil if the list is empty" do
-      assert_nil @list.find_middle_value
+      expect(@list.find_middle_value).must_be_nil
     end
 
     it "returns the first value if the list only has one value" do
