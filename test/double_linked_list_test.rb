@@ -107,27 +107,24 @@ describe DoublyLinkedList do
         end
     end
 
-    # describe 'max and min values' do
-    #     it 'returns nil if the list is empty' do
-    #         expect(@double_list.find_max()).must_be_nil
-    #         expect(@double_list.find_min()).must_be_nil
-    #     end
+    describe "nth_from_the_end" do
+        it 'returns nil if n is outside the bounds of the list' do
+            expect(@double_list.find_nth_from_end(3)).must_be_nil
+        end
 
-    #     it 'can retrieve the max and min values in the list' do
-    #         count = 0
-    #         while count < 5
-    #             @double_list.add_first(count)
-    #             expect(@double_list.find_max).must_equal count
-    #             expect(@double_list.find_min).must_equal 0
-    #             count += 1
-    #         end
+        it 'can retrieve an item at index n from the end in the list' do
+            @double_list.add_first(1)
+            @double_list.add_first(2)
+            @double_list.add_first(3)
+            @double_list.add_first(4)
 
-    #         @double_list.add_last(100)
-    #         @double_list.add_first(-12)
-    #         expect(@double_list.find_max).must_equal 100
-    #         expect(@double_list.find_min).must_equal(-12)
-    #     end
-    # end
+            expect(@double_list.find_nth_from_end(0)).must_equal 1
+            expect(@double_list.find_nth_from_end(1)).must_equal 2
+            expect(@double_list.find_nth_from_end(2)).must_equal 3
+            expect(@double_list.find_nth_from_end(3)).must_equal 4
+            expect(@double_list.find_nth_from_end(4)).must_be_nil
+        end
+    end
 
     # describe "delete" do
     #     it "delete from empty linked list is a no-op" do
@@ -163,35 +160,20 @@ describe DoublyLinkedList do
     #     end
     # end
 
-    # describe "nth_from_the_end" do
-    #     it 'returns nil if n is outside the bounds of the list' do
-    #         expect(@double_list.find_nth_from_end(3)).must_be_nil
-    #     end
-
-    #     it 'can retrieve an item at index n from the end in the list' do
-    #         @double_list.add_first(1)
-    #         @double_list.add_first(2)
-    #         @double_list.add_first(3)
-    #         @double_list.add_first(4)
-
-    #         expect(@double_list.find_nth_from_end(0)).must_equal 1
-    #         expect(@double_list.find_nth_from_end(1)).must_equal 2
-    #         expect(@double_list.find_nth_from_end(2)).must_equal 3
-    #         expect(@double_list.find_nth_from_end(3)).must_equal 4
-    #         expect(@double_list.find_nth_from_end(4)).must_be_nil
-    #     end
-    # end
+    
 
     # describe "reverse" do
     #     it 'can retrieve an item at index n from the end in the list' do
-    #         @double_list.add_first(4)
-    #         @double_list.add_first(3)
-    #         @double_list.add_first(2)
-    #         @double_list.add_first(1)
-    #         @double_list.reverse
+            # @double_list.add_first(4)
+            # @double_list.add_first(3)
+            # @double_list.add_first(2)
+            # @double_list.add_first(1)
+            # @double_list.reverse
 
-    #         expect(@double_list.get_first).must_equal 1
-    #         expect(@double_list.get_last).must_equal 4
+            # expect(@double_list.find_nth_from_end(0)).must_equal 1
+            # expect(@double_list.find_nth_from_end(1)).must_equal 2
+            # expect(@double_list.find_nth_from_end(2)).must_equal 3
+            # expect(@double_list.find_nth_from_end(3)).must_equal 4
     #     end
     # end
 end

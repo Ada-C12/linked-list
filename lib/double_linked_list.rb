@@ -10,6 +10,7 @@ class DoubleNode
 
 # Defines the doubly linked list
 class DoublyLinkedList
+    attr_reader :tail, :head
     def initialize
         @head = nil
         @tail = nil
@@ -77,31 +78,41 @@ class DoublyLinkedList
         return nil
     end
 
-    def reverse
+    def find_nth_from_end(n)
         return nil if @head.nil?
-          
-        current_node = @head
-        until current_node.next.nil? do
-          next_node = current_node.next 
-          current_node.next = current_node.previous
-          
-          current_node = next_node
-        end
-  
-        @head = current_node
-      end
-
-    def delete(data)
-        return nil if @head.nil?
-        current = @head
-
-        until current.next.nil? do
-            if current.data == data
-                current.previous.next = current.next
-                current.next.previous = current.previous
+        
+        current = @tail
+        counter = 0
+        until current.nil? do
+            if counter == n
+                return current.data
             end
-            current = current.next
+            current = current.previous
+            counter += 1
         end
+        return nil
+    end
+
+    def visit
+        return nil if @head.nil?
+  
+        current = @head
+        until current.nil? do
+          if current.next.nil?
+            print "#{current.data}"
+          else
+            print "#{current.data} -> "
+          end
+          current = current.next
+        end
+    end
+
+    def reverse
+    #  TODO
+    end
+
+    def delete(value)
+    #  TODO
     end
 end
 
