@@ -149,8 +149,49 @@ class LinkedList
 
   # method to delete the first node found with specified value
   def delete(value)
-    raise NotImplementedError
+
+    current = @head
+
+    # if list is empty
+    if current.nil?
+      return
+    end
+
+    # if value is at head
+    if current.data == value
+      @head = current.next
+    end
+
+    # traverse list for matching value. stop when we find a match or get past the final node
+    until current.nil? || current.data == value
+      # if value isn't in the list, stop
+      if current.next.nil?
+        return
+      # if the value matches our target value, make previous node point to node after current node
+      elsif current.next.data == value
+        current.next = current.next.next
+      end
+      current = current.next
+    end
+
+  
+
+    # # otherwise, traverse all nodes 
+    # until current.nil?  
+    #   # if next node's value matches value sought ...
+    #   if current.next.data == value
+    #     # ... previous node points to node after the next node
+    #     next_node = current.next 
+    #     node_after = next_node.next
+    #     current.next = node_after
+    #   end
+    #   current = current.next
+    # end
+
+    # if value isn't in the list
+
   end
+
 
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
