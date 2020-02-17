@@ -129,7 +129,7 @@ class LinkedList
     end
 
     # method to delete the first node found with specified value
-    # Time: O(n) - you might have to check each node
+    # Time: O(n) to find the node, but O(1) to delete it
     # Space: O(1)
     def delete(value)
       return nil if @head.nil?
