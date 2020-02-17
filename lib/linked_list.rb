@@ -19,14 +19,31 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
+      if @head.nil?
       @head = Node.new(value)
+      else
+        next_node = @head
+        @head = Node.new(value, next_node)
+      end
       return @head
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
-      raise NotImplementedError
+      return false if @head.nil?
+      return true if @head.data == value
+      if @head.next
+        checking_node = @head
+        found = false
+      end
+      until checking_node.next == nil || found == true
+        checking_node = checking_node.next
+        if checking_node.data == value
+          found = true
+        end
+      end
+      return found
     end
 
     # method to return the max value in the linked list
@@ -95,6 +112,7 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
+      return nil if @head.nil?
       return @head.data
     end
 
