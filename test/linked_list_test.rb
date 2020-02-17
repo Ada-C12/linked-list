@@ -150,13 +150,13 @@ describe LinkedList do
     end
 
     describe "delete" do
-        xit "delete from empty linked list is a no-op" do
+        it "delete from empty linked list is a no-op" do
             expect(@list.length).must_equal 0
             @list.delete(4)
             expect(@list.length).must_equal 0
         end
 
-        xit "can delete valid values from list" do
+        it "can delete valid values from list" do
             @list.add_last(9)
             @list.add_last(10)
             @list.add_first(4)
