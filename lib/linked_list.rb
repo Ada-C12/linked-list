@@ -172,7 +172,18 @@ class LinkedList
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
     def find_middle_value
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      fast_pointer = @head
+      slow_pointer = @head
+
+      until fast_pointer.next.nil? do
+        fast_pointer = fast_pointer.next
+        fast_pointer = fast_pointer.next if !fast_pointer.next.nil?
+        slow_pointer = slow_pointer.next
+      end
+
+      return slow_pointer.data
     end
 
     # find the nth node from the end and return its value
@@ -201,10 +212,28 @@ class LinkedList
     # checks if the linked list has a cycle. A cycle exists if any node in the
     # linked list links to a node already visited.
     # returns true if a cycle is found, false otherwise.
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def has_cycle
-      raise NotImplementedError
-    end
+      return nil if @head.nil?
 
+      if @head.next
+        fast_pointer = @head.next
+        slow_pointer = @head
+      else
+        return false
+      end
+
+      until slow_pointer.nil? do
+        return true if slow_pointer == fast_pointer
+        
+        fast_pointer = fast_pointer.next if !fast_pointer.nil?
+        fast_pointer = fast_pointer.next if !fast_pointer.nil?
+        slow_pointer = slow_pointer.next
+      end
+
+      return false
+    end
 
     # Additional Exercises 
     # returns the value in the first node
@@ -275,6 +304,8 @@ class LinkedList
     # Helper method for tests
     # Creates a cycle in the linked list for testing purposes
     # Assumes the linked list has at least one node
+    # Time Complexity: O(n) where n is number of nodes in list
+    # Space Complexity: O(1)
     def create_cycle
       return if @head == nil # don't do anything if the linked list is empty
 
