@@ -93,12 +93,26 @@ class LinkedList
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      current = @head
+
+      until current.nil?
+        print current.data
+        current = current.next
+      end
     end
 
     # method to delete the first node found with specified value
     def delete(value)
-      raise NotImplementedError
+      current = @head
+
+      return nil if current.nil?
+      until current.nil?
+        to_delete = current if current.data == value
+        current = current.next
+      end
+
+      to_delete.previous.next = to_delete.next
+      to_delete.next.previous = to_delete.previous
     end
 
     # method to reverse the singly linked list
@@ -132,18 +146,38 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      raise NotImplementedError
+      current = @head
+
+      return nil if current.nil?
+      return @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      raise NotImplementedError
+      current = @head
+
+      if current.nil?
+        @head = Node.new(value)
+        return
+      end
+
+      until current.next.nil?
+        current = current.next
+      end
+
+      current.next = Node.new(value)
     end
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+      current = @head
+
+      return nil if current.nil?
+      until current.next.nil?
+        current = current.next
+      end
+      return current.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
