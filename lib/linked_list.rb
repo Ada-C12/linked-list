@@ -18,7 +18,6 @@ class LinkedList
 
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
-
     def add_first(value)
       if @head == nil
         @head = Node.new(value)
@@ -125,23 +124,53 @@ class LinkedList
       return current.data
     end
 
-    # method to print all the values in the linked list
+    # method to print (return) all the values in the linked list
     def visit
-      # raise NotImplementedError
+      current = @head
+      all_values = []
+      until current.nil?
+        all_values.push(current.data)
+        current = current.next
+      end
+
+      return all_values
     end
 
     # method to delete the first node found with specified value
-    x -> y -> z
     def delete(value)
-      current = @head
-      until (current.next).nil?
+      return if @head.nil?
+    
+      current= @head
+      if current.data == value 
+        @head = current.next
+      end
+
+      until current.nil? || current.data == value
+       if current.next.nil?
+        return
+       elsif current.next.data == value
+        current.next = current.next.next
+       end
+       current = current.next
       end
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
-      # raise NotImplementedError
+      return if @head.nil?
+      current = @head
+      previous = nil
+
+      until current.next.nil?
+          temp = current.next
+          current.next = previous
+          previous = current
+          current = temp
+      end
+
+      current.next = previous
+      @head = current
     end
 
 
@@ -155,6 +184,19 @@ class LinkedList
     # assume indexing starts at 0 while counting to n
     def find_nth_from_end(n)
       # raise NotImplementedError
+      length = self.length
+      if n >= length
+        return nil
+      end
+
+      current = @head
+      counter = (length - 1 - n)
+
+      counter.times do
+        current = current.next 
+      end
+
+      return current.data
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -226,7 +268,6 @@ class LinkedList
       while current.next != nil
           current = current.next
       end
-
       current.next = @head # make the last node link to first node
     end
 end

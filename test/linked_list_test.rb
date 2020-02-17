@@ -126,6 +126,21 @@ describe LinkedList do
             expect(@list.get_at_index(3)).must_equal 1
         end
     end
+    describe 'visit' do
+        it 'prints all the values in a linked list' do
+            @list.add_first(2)
+            @list.add_first(3)
+            expect(@list.visit).must_be_kind_of Array
+            expect(@list.visit.length).must_equal 2
+            expect(@list.visit.first).must_equal 3
+            expect(@list.visit.last).must_equal 2
+
+            @list.delete(2)
+            @list.delete(3)
+            expect(@list.visit).must_be_kind_of Array
+            expect(@list.visit.length).must_equal 0
+        end
+    end
 
     describe 'max and min values' do
         it 'returns nil if the list is empty' do
@@ -190,11 +205,11 @@ describe LinkedList do
     end
 
     describe "nth_from_the_end" do
-        xit 'returns nil if n is outside the bounds of the list' do
+        it 'returns nil if n is outside the bounds of the list' do
             expect(@list.find_nth_from_end(3)).must_be_nil
         end
 
-        xit 'can retrieve an item at index n from the end in the list' do
+        it 'can retrieve an item at index n from the end in the list' do
             @list.add_first(1)
             @list.add_first(2)
             @list.add_first(3)
@@ -209,7 +224,7 @@ describe LinkedList do
     end
 
     describe "reverse" do
-        xit 'can retrieve an item at index n from the end in the list' do
+        it 'can retrieve an item at index n from the end in the list' do
             @list.add_first(4)
             @list.add_first(3)
             @list.add_first(2)
