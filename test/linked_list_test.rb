@@ -190,6 +190,27 @@ describe LinkedList do
     end
   end
 
+  describe "find_middle_value" do
+    it "returns the value in the middle if list is even numbered" do
+      @list.add_first(8)
+      @list.add_first(6)
+      @list.add_first(4)
+      @list.add_first(2)
+
+      expect(@list.find_middle_value).must_equal 8
+    end
+
+    it "returns the value in the middle if list is odd numbered" do
+      @list.add_first(10)
+      @list.add_first(8)
+      @list.add_first(6)
+      @list.add_first(4)
+      @list.add_first(2)
+
+      expect(@list.find_middle_value).must_equal 6
+    end
+  end
+
   describe "nth_from_the_end" do
     it "returns nil if n is outside the bounds of the list" do
       expect(@list.find_nth_from_end(3)).must_be_nil

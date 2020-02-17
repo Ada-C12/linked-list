@@ -54,7 +54,7 @@ class LinkedList
   # returns the data value and not the node
   def find_min
     return nil if @head.nil?
-    min_val = 0
+    min_val = @head.data
     current = @head
 
     until current == nil
@@ -99,17 +99,19 @@ class LinkedList
 
   # method to delete the first node found with specified value
   def delete(value)
+    return nil if @head == nil
     current = @head
-    previous = nil
 
-    until current.next.nil?
-      if current == value
-        previous.next = current.next
-        return
-      else
-        previous = current
-      end
+    if current.data == value
+      @head = current.next
+    end
+
+    while current.next && current.next.data != value
       current = current.next
+    end
+
+    if current.next != nil
+      current.next = current.next.next
     end
   end
 
@@ -134,7 +136,14 @@ class LinkedList
   ## Advanced Exercises
   # returns the value at the middle element in the singly linked list
   def find_middle_value
-    raise NotImplementedError
+    list_length = self.length
+    mid = length / 2
+
+    if list_length % 2 == 0
+      mid += 1
+    end
+
+    return self.get_at_index(mid)
   end
 
   # find the nth node from the end and return its value
@@ -142,16 +151,18 @@ class LinkedList
   def find_nth_from_end(n)
     current = @head
     n_ahead = @head
-    length = 0
 
-    until current.nil?
-      length += 1
-      current = current.next
+    return nil if current.nil?
+
+    n.times do
+      return nil if n_ahead.next.nil?
+      n_ahead = n_ahead.next
     end
-    return nil if n > length
-    current = @head
-    (length - n).times do
+
+    until n_ahead.next.nil?
+      return current.data if current.next.nil?
       current = current.next
+      n_ahead = n_ahead.next
     end
     return current.data
   end
@@ -160,7 +171,18 @@ class LinkedList
   # linked list links to a node already visited.
   # returns true if a cycle is found, false otherwise.
   def has_cycle
-    raise NotImplementedError
+    slow = @head.next
+    fast = @head.next.next
+
+    until fast.nil?
+      fast = fast.next
+      return false if fast.nil?
+
+      fast = fast.next
+      slow = slow.next
+      return true if fast == slow
+    end
+    return false
   end
 
   # Additional Exercises
