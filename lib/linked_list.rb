@@ -59,12 +59,14 @@ class LinkedList
     if current.nil?
       @head = new_node
     else
-      while current != nil
-        current = current.next  
+      until current.next.nil?
+        current = current.next
       end
+      current.next = new_node
     end
-    current = new_node
   end
+  
+  
   
   # method that returns the value of the last node in the linked list
   # returns nil if the linked list is empty
