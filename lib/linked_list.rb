@@ -87,23 +87,64 @@ class LinkedList
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      raise NotImplementedError
+      current = @head 
+      count = 0 
+      
+      while current != nil 
+        return current.data if count == index 
+        count += 1 
+        current = current.next 
+      end 
+
+      return nil 
     end
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      current = @head 
+
+      while current != nil 
+        print current.data 
+        current = current.next
+      end 
     end
 
     # method to delete the first node found with specified value
     def delete(value)
-      raise NotImplementedError
+      current = @head 
+      previous = nil 
+
+      return nil if current.nil?
+
+      while current.data != value 
+        previous = current 
+        current = current.next 
+      end 
+
+      if previous.nil?
+        @head = current.next 
+      else 
+        previous.next = current.next 
+      end 
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
-      raise NotImplementedError
+      return if @head.nil?
+
+      current = @head 
+      previous = nil 
+
+      until current.next.nil? 
+        temp = current.next 
+        current.next = previous 
+        previous = current 
+        current = temp 
+      end 
+
+      current.next = previous 
+      @head = current
     end
 
 
@@ -150,7 +191,9 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      raise NotImplementedError
+      return nil if @head.nil?
+      
+      return @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
@@ -172,7 +215,13 @@ class LinkedList
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+      current = @head 
+
+      until current.next == nil 
+        current = current.next 
+      end 
+
+      return current.data 
     end
 
     # method to insert a new node with specific data value, assuming the linked
