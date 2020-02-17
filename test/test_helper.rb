@@ -6,4 +6,5 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 
 require_relative '../lib/linked_list'
+require_relative '../lib/double_linked_list'
 
