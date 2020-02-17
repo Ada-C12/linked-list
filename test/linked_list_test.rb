@@ -190,7 +190,7 @@ describe LinkedList do
         end
     end
 
-describe "reverse" do
+    describe "reverse" do
         it 'returns nil if list is empty' do
             expect(@list.reverse).must_be_nil
         end
@@ -198,7 +198,7 @@ describe "reverse" do
         it 'returns correct value is list has only one node' do
             @list.add_first(5)
             @list.reverse
-            
+
             expect(@list.get_first).must_equal 5
         end
 
@@ -213,6 +213,36 @@ describe "reverse" do
             expect(@list.find_nth_from_end(1)).must_equal 2
             expect(@list.find_nth_from_end(2)).must_equal 3
             expect(@list.find_nth_from_end(3)).must_equal 4
+        end
+    end
+
+    describe "find middle value" do
+        it 'returns nil if list is empty' do
+            expect(@list.find_middle_value).must_be_nil
+        end
+
+        it 'returns correct value is list has only one node' do
+            @list.add_first(5)        
+            expect(@list.find_middle_value).must_equal 5
+        end
+
+        it 'can find the middle value for an odd-length list' do
+            @list.add_first(5)       
+            @list.add_first(4)
+            @list.add_first(3)
+            @list.add_first(2)
+            @list.add_first(1)
+
+            expect(@list.find_middle_value).must_equal 3
+        end
+
+        it 'can find the middle value for an even-length list' do
+            @list.add_first(4)       
+            @list.add_first(3)
+            @list.add_first(2)
+            @list.add_first(1)
+
+            expect(@list.find_middle_value).must_equal 2
         end
     end
 end
