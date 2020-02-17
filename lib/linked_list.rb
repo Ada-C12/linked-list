@@ -19,7 +19,8 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      raise NotImplementedError
+      @head = Node.new(value)
+      return @head
     end
 
     # method to find if the linked list contains a node with specified value
@@ -94,7 +95,7 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      raise NotImplementedError
+      return @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
