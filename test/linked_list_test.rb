@@ -150,6 +150,24 @@ describe LinkedList do
     end
   end
 
+  describe "visit" do
+    it "returns nil if list is empty" do
+      @list = LinkedList.new
+
+      expect(@list.visit).must_be_nil
+    end
+
+    it "returns all the values from a LinkedList" do
+      @list = LinkedList.new
+
+      @list.add_first(5)
+      @list.add_first(3)
+      @list.add_first(1)
+
+      assert_output(/1\n3\n5\n/) { @list.visit }
+    end
+  end
+
   describe "delete" do
     it "delete from empty linked list is a no-op" do
       expect(@list.length).must_equal 0
@@ -242,6 +260,20 @@ describe LinkedList do
       expect(@list.find_nth_from_end(1)).must_equal 2
       expect(@list.find_nth_from_end(2)).must_equal 3
       expect(@list.find_nth_from_end(3)).must_equal 4
+    end
+  end
+
+  describe "insert_ascending_order" do
+    it "inserts a node at the beginning" do
+      @list.add_first(10)
+      @list.add_first(9)
+      @list.add_first(4)
+      @list.add_first(3)
+      @list.add_first(2)
+
+      @list.insert_ascending(1)
+
+      expect(@list.get_first).must_equal 1
     end
   end
 end

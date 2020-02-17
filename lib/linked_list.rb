@@ -94,7 +94,14 @@ class LinkedList
 
   # method to print all the values in the linked list
   def visit
-    raise NotImplementedError
+    return nil if @head.nil?
+
+    current = @head
+
+    until current.nil?
+      puts "#{current.data}"
+      current = current.next
+    end
   end
 
   # method to delete the first node found with specified value
@@ -223,7 +230,23 @@ class LinkedList
   # method to insert a new node with specific data value, assuming the linked
   # list is sorted in ascending order
   def insert_ascending(value)
-    raise NotImplementedError
+    if @head.nil?
+      self.add_first(value)
+    end
+
+    current = @head
+
+    if value < current.data
+      self.add_first(value)
+    end
+
+    until current.nil?
+      if value >= current.data
+        new_node = Node.new(value, current.next.next)
+        current.next = new_node
+      end
+      current = current.next
+    end
   end
 
   # Helper method for tests
