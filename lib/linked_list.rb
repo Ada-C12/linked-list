@@ -176,11 +176,9 @@ class LinkedList
 
   end
 
-
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
   def reverse
-    raise NotImplementedError
   end
 
 
@@ -193,7 +191,28 @@ class LinkedList
   # find the nth node from the end and return its value
   # assume indexing starts at 0 while counting to n
   def find_nth_from_end(n)
-    raise NotImplementedError
+    current = @head
+    n_ahead = @head
+
+    # return nil if list is empty
+    return nil if current.nil?
+
+    n.times do
+      # move n_ahead pointer forward n nodes
+      n_ahead = n_ahead.next
+      # return nil if n is outside bounds of list
+      return if n_ahead.nil?
+    end
+
+    # move n_ahead forward until it's pointing at the last node. Move current forward the same number of times. 
+    while n_ahead.next != nil
+      n_ahead = n_ahead.next
+      current = current.next
+    end
+
+    # current is now pointing at the nth node from the end
+    return current.data
+
   end
 
   # checks if the linked list has a cycle. A cycle exists if any node in the
