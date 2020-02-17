@@ -138,6 +138,7 @@ class LinkedList
 
     if current.data == value
       @head = current.next
+      return
     end
 
     until current.next.nil?
