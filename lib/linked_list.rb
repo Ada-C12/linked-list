@@ -25,7 +25,7 @@ class LinkedList
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
-      return find_node_and_previous_node(value).first
+      return find_node_and_previous_node(value).first != nil
     end
 
     # method to return the max value in the linked list
