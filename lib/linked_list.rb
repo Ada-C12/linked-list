@@ -31,13 +31,13 @@ class LinkedList
   def search(value)
     current = @head
     until current.nil?
-      if current.value == value
-        return current
+      if current.data == value
+        return true
       else
         current = current.next
       end
     end
-    
+    return false    
   end
   
   # method to return the max value in the linked list
@@ -198,17 +198,25 @@ class LinkedList
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
   def reverse
+    # this will break if fed a linked list with fewer than three nodes
     if @head
       current = @head
       current_next = @head.next
-      while current_next.next
-        a = current
-        b = current_next
-        c = b.next
-        b.next = a
-        current = b
-        current_next = c
+      current_next_next = current_next.next
+      
+      while current.next
+        if current_next.next
+          current_next_next = current_next.next
+          current_next.next = current
+          current = current_next
+          current_next = current_next_next
+        else
+          current_next.next = current
+          current = current_next
+          break
+        end
       end
+      
       @head.next = nil
       @head = current
     else
@@ -220,7 +228,26 @@ class LinkedList
   ## Advanced Exercises
   # returns the value at the middle element in the singly linked list
   def find_middle_value
-    raise NotImplementedError
+    # UNTESTED
+    if @head
+      count = 0
+      endNode = @head
+      while endNode
+        endNode = endNode.next
+        count += 1
+      end
+      midPoint = count/2
+      midNode = @head
+      while count >= midPoint
+        midNode = midNode.next
+        count -= 1
+      end
+      return midNode.data
+      
+    else
+      return nil
+    end
+    
   end
   
   # find the nth node from the end and return its value
@@ -229,16 +256,32 @@ class LinkedList
     if @head
       count = 0
       current = @head
+      
+      # moves pointer n nodes along the list
       while count < n
         current = current.next
         count += 1
       end
+      
+      # returns nil if n is larger than the length of the list
+      return nil if current.nil?
+      
+      # assigns another pointer to the head of the list
       nth_from_end = @head
-      if current.next
+      
+      # when current pointer reaches the end of the list,
+      # 'nth_from_end' pointer will be 'n' from the end
+      while !current.next.nil?
         current = current.next
         nth_from_end = nth_from_end.next
       end
-      return nth_from_end.data
+      
+      if nth_from_end
+        return nth_from_end.data
+      else
+        return nil
+      end
+      
     else
       return nil
     end
