@@ -47,7 +47,8 @@ class LinkedList
       return nil if @head == nil
       
       current = @head
-      max = 0
+      max = current.data
+      
       until current == nil
         if current.data > max
           max = current.data
@@ -91,20 +92,19 @@ class LinkedList
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      length = 0
       current = @head
-      value_to_find = nil
 
-      until current == nil
-        if index == length
-          value_to_find = current.data
-          current = nil
+      index.times do 
+        if current != nil
+          current = current.next
         end
-        length += 1
-        current == current.next
       end
 
-      return value_to_find 
+      if current != nil
+        return  current.data
+      else
+        return nil
+      end
     end
 
     # method to print all the values in the linked list
@@ -125,8 +125,9 @@ class LinkedList
       previous = current 
 
       until current == nil || previous.next == nil
+
         if current.data == value
-          previous.next == current.next
+          previous.next == nil
           current.next = nil
         end 
       end
@@ -135,13 +136,20 @@ class LinkedList
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
-      previous = nil
+      return if @head.nil?
+      
       current = @head
+      previous = nil
 
-      until current == nil
-        current = current.next
+      until current.next.nil?
+        temp = current.next
         current.next = previous
+        previous = current
+        current = temp
+      end
 
+      current.next = previous
+      @head = current
     end
 
 
@@ -153,9 +161,22 @@ class LinkedList
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
-    def find_nth_from_end(n)
-      raise NotImplementedError
-    end
+    # def find_nth_from_end(n)
+    #   return nil if @head == nil
+
+    #   current = @head
+    #   nth_previous = current
+
+    #   until current.next == nil
+    #     (n - 1).times do
+    #       nth_previous = nth_previous.next
+    #     end
+
+    #     n.times do
+    #       current = current.next
+    #     end
+    #   end
+    # end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
     # linked list links to a node already visited.
@@ -185,17 +206,25 @@ class LinkedList
         previous = current
         new_last_node = Node.new(value, nil)
 
-        until @current.next == nil
+        until current.next == nil
           current = current.next
         end
-        current.next == new_last_node
+        current.next = new_last_node
       end
     end
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+      return nil if @head == nil
+
+      current = @head
+
+      until current.next ==  nil
+        current = current.next
+      end
+
+      return current.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
