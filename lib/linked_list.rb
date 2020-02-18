@@ -338,7 +338,31 @@ class LinkedList
   # method to insert a new node with specific data value, assuming the linked
   # list is sorted in ascending order
   def insert_ascending(value)
-    raise NotImplementedError
+
+    # if list is empty or node should be inserted at the beginning of the list
+    if @head.nil? || value < @head.data
+      self.add_first(value)
+      return
+    end
+
+    current = @head
+    previous = nil
+    until current.nil?
+      # if node should be inserted before end of list
+      if current.next != nil && current.next.data > value
+        temp = current.next
+        new_node = Node.new(value, temp)
+        previous = current
+        previous.next = new_node
+        current = temp
+
+      # if node should be inserted at end of list
+      elsif current.next.nil? && current.data < value
+        self.add_last(value)
+      end
+      current = current.next
+    end
+
   end
 
   # Helper method for tests

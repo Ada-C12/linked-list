@@ -305,4 +305,43 @@ describe LinkedList do
 
     end
 
+    describe "insert ascending" do
+        it 'inserts value at head if list is empty' do
+            @list.insert_ascending(7)
+            expect(@list.get_first).must_equal 7
+        end
+
+        it 'can insert a value at the beginning of a linked list' do
+            @list.add_first(4)   
+            @list.add_first(3)   
+            @list.add_first(2)   
+            @list.insert_ascending(1)
+            expect(@list.length).must_equal 4
+            expect(@list.get_first).must_equal 1
+        end
+
+        it 'can insert a value in the middle of a linked list' do
+            @list.add_first(5)   
+            @list.add_first(4)   
+            @list.add_first(2)   
+            @list.add_first(1)  
+            @list.insert_ascending(3)
+            expect(@list.length).must_equal 5
+            expect(@list.find_middle_value).must_equal 3
+        end
+
+        it 'can insert a value at the end of a linked list' do
+            @list.add_first(4)   
+            @list.add_first(3)   
+            @list.add_first(2)   
+            @list.add_first(1) 
+            @list.add_first(0)
+            @list.add_first(-1)
+            @list.insert_ascending(6)
+            expect(@list.length).must_equal 7
+            expect(@list.get_last).must_equal 6
+        end
+
+    end
+
 end
