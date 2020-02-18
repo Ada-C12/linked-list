@@ -203,7 +203,6 @@ class LinkedList
     @head = previous
   end
 
-
   ## Advanced Exercises
   # returns the value at the middle element in the singly linked list
   def find_middle_value
@@ -223,7 +222,7 @@ class LinkedList
       fast = fast.next.next
     end
 
-    # when fast is at the last node, slow is at the middle node
+    # when fast is at the last (odd list length) or second-to-last (even list length) node, slow is at the middle node
     return slow.data
 
   end
@@ -259,7 +258,26 @@ class LinkedList
   # linked list links to a node already visited.
   # returns true if a cycle is found, false otherwise.
   def has_cycle
-    raise NotImplementedError
+    # if list is empty
+    return false if @head.nil?
+    # if list has one node whose 'next' is nil i.e. not a cycle
+    return false if @head.next.nil?
+
+    slow = @head
+    fast = @head
+
+    # traverse the list moving slow forward one node and fast two nodes until fast reaches last (or second-to-last) node
+    until fast.next.nil? || fast.next.next.nil?
+      if fast = slow
+        return true
+      end
+      slow = slow.next
+      fast = fast.next.next
+    end
+
+    return false
+    # if fast and slow ever point to the same node, we have a cycle
+
   end
 
   # method that inserts a given value as a new last node in the linked list
