@@ -268,6 +268,7 @@ class LinkedList
 
     # traverse the list moving slow forward one node and fast two nodes until fast reaches last (or second-to-last) node
     until fast.next.nil? || fast.next.next.nil?
+      # if fast and slow ever point to the same node, we have a cycle
       if fast = slow
         return true
       end
@@ -275,8 +276,8 @@ class LinkedList
       fast = fast.next.next
     end
 
+    # if fast and slow don't ever point to the same node, no cycle
     return false
-    # if fast and slow ever point to the same node, we have a cycle
 
   end
 
