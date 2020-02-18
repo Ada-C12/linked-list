@@ -260,7 +260,7 @@ class LinkedList
   def has_cycle
     # if list is empty
     return false if @head.nil?
-    # if list has one node whose 'next' is nil i.e. not a cycle
+    # if list has one node whose 'next' is false i.e. not a cycle
     return false if @head.next.nil?
 
     slow = @head
