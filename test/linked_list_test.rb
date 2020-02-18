@@ -5,6 +5,7 @@ require 'minitest/skip_dsl'
 require_relative 'test_helper'
 
 
+
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe LinkedList do
@@ -13,7 +14,7 @@ describe LinkedList do
         @list = LinkedList.new
     end
 
-    describe 'initialize' do
+    xdescribe 'initialize' do
         it 'can be created' do
 
             # Assert
@@ -21,11 +22,11 @@ describe LinkedList do
         end
     end
 
-    describe 'add_first & get_first' do
+    xdescribe 'add_first & get_first' do
         it 'can add values to an empty list' do
             # Act
             @list.add_first(3)
-
+            
             # Assert
             expect(@list.get_first).must_equal 3
         end
@@ -51,7 +52,7 @@ describe LinkedList do
         end
     end
 
-    describe "search" do
+    xdescribe "search" do
         it "can find an element" do
             @list = LinkedList.new
             @list.add_first(3)
@@ -60,6 +61,7 @@ describe LinkedList do
             expect(@list.search(3)).must_equal true
 
             expect(@list.search(2)).must_equal true
+      
         end
 
         it "returns false if the element is not in the list" do
@@ -74,7 +76,7 @@ describe LinkedList do
         end
     end
 
-    describe "length" do
+   xdescribe "length" do
         it "will return 0 for an empty list" do
             expect(@list.length).must_equal 0
         end
@@ -89,7 +91,7 @@ describe LinkedList do
         end
     end
 
-    describe "addLast & getLast" do
+    xdescribe "addLast & getLast" do
         it "will add to the front if the list is empty" do
             @list.add_last(1)
             expect(@list.get_first).must_equal 1
@@ -152,7 +154,7 @@ describe LinkedList do
         end
     end
 
-    describe "delete" do
+    xdescribe "delete" do
         it "delete from empty linked list is a no-op" do
             expect(@list.length).must_equal 0
             @list.delete(4)
@@ -192,7 +194,7 @@ describe LinkedList do
         end
     end
 
-    describe "nth_from_the_end" do
+    xdescribe "nth_from_the_end" do
         it 'returns nil if n is outside the bounds of the list' do
             expect(@list.find_nth_from_end(3)).must_be_nil
         end
@@ -211,7 +213,7 @@ describe LinkedList do
         end
     end
 
-    describe "reverse" do
+    xdescribe "reverse" do
         it 'can retrieve an item at index n from the end in the list' do
             @list.add_first(4)
             @list.add_first(3)

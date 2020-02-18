@@ -1,4 +1,4 @@
-
+require 'pry'
 # Defines a node in the singly linked list
 class Node
   attr_reader :data # allow external entities to read value but not write
@@ -19,38 +19,82 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      raise NotImplementedError
+      new_node = Node.new(value)
+
+      new_node.next = @head
+
+      @head = new_node 
+      # head is not a node, it is just a variable that refers to the first node
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
-      raise NotImplementedError
+      current = @head
+
+      until current == nil
+        return true if current.data == value
+        current = current.next 
+      end 
+
+      return false
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      return nil if @head == nil 
+
+      current = @head 
+      max = current.data
+
+    
+      until current == nil
+        max = current.data if current.data > max
+        current = current.next
+      end 
+      
+      return max
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
-      raise NotImplementedError
-    end
+      return nil if @head == nil
 
+      current = @head 
+      min = current.data
+
+
+      until current == nil
+        min = current.data if current.data < min
+        current = current.next
+      end
+
+      return min
+    end
 
     # method that returns the length of the singly linked list
     def length
-      raise NotImplementedError
+
+      count = 0
+      current = @head
+      # current 
+
+      until current == nil
+        count += 1
+        current = current.next 
+      end 
+
+      return count
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      raise NotImplementedError
+      
+
     end
 
     # method to print all the values in the linked list
@@ -94,12 +138,26 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      raise NotImplementedError
+      return nil if @head == nil
+
+      @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      raise NotImplementedError
+      return nil if @head == nil
+
+      current = @head
+
+      last_node = ''
+      new_node = Node.new(value)
+
+      until current == nil
+        last_node = current 
+        current = current.next
+      end
+
+      last_node.next = new_node
     end
 
     # method that returns the value of the last node in the linked list
