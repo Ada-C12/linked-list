@@ -285,4 +285,24 @@ describe LinkedList do
         end
     end
 
+    describe "visit" do
+        it 'returns nil if list is empty' do
+            expect(@list.visit).must_be_nil
+        end
+
+        it 'prints the head value if list has one node' do
+            @list.add_first(9)        
+            expect(@list.visit).must_equal 9
+        end
+
+        it 'returns correct values for a list with multiple nodes' do
+            @list.add_first(4)   
+            @list.add_first(3)   
+            @list.add_first(2)   
+            @list.add_first(1)  
+            expect(@list.visit).must_equal '1 2 3 4'
+        end
+
+    end
+
 end

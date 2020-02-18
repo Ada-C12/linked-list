@@ -144,7 +144,22 @@ class LinkedList
 
   # method to print all the values in the linked list
   def visit
+    
+    # if list is empty
+    return nil if @head.nil?
 
+    # if list has only one node
+    return @head.data if @head.next.nil?
+
+    # traverse the list and send each value to an array
+    current = @head
+    values = []
+    until current.nil?
+      values << current.data
+      current = current.next
+    end
+
+    return values.join(' ')
   end
 
   # method to delete the first node found with specified value
