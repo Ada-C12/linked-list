@@ -15,7 +15,6 @@ describe LinkedList do
 
     describe 'initialize' do
         it 'can be created' do
-
             # Assert
             expect(@list).must_be_kind_of LinkedList
         end
@@ -56,9 +55,7 @@ describe LinkedList do
             @list = LinkedList.new
             @list.add_first(3)
             @list.add_first(2)
-
             expect(@list.search(3)).must_equal true
-
             expect(@list.search(2)).must_equal true
         end
 
@@ -127,6 +124,21 @@ describe LinkedList do
             expect(@list.get_at_index(1)).must_equal 3
             expect(@list.get_at_index(2)).must_equal 2
             expect(@list.get_at_index(3)).must_equal 1
+        end
+    end
+    describe 'visit' do
+        it 'prints all the values in a linked list' do
+            @list.add_first(2)
+            @list.add_first(3)
+            expect(@list.visit).must_be_kind_of Array
+            expect(@list.visit.length).must_equal 2
+            expect(@list.visit.first).must_equal 3
+            expect(@list.visit.last).must_equal 2
+
+            @list.delete(2)
+            @list.delete(3)
+            expect(@list.visit).must_be_kind_of Array
+            expect(@list.visit.length).must_equal 0
         end
     end
 
