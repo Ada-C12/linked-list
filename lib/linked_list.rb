@@ -108,12 +108,30 @@ class LinkedList
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      return nil if @head.nil?
+      checking_node = @head
+      until checking_node.next == nil
+        puts checking_node.data
+        checking_node = checking_node.next
+      end
     end
 
     # method to delete the first node found with specified value
     def delete(value)
-      raise NotImplementedError
+      return nil if @head.nil?
+      checking_node = @head
+      previous_node = nil
+      until checking_node.nil?
+        if checking_node.data == value
+          if checking_node == @head
+            @head = checking_node.next
+          else
+            previous_node.next = checking_node.next 
+          end
+        end
+        previous_node = checking_node
+        checking_node = checking_node.next
+      end
     end
 
     # method to reverse the singly linked list
