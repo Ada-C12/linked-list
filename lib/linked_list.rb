@@ -121,35 +121,23 @@ class LinkedList
     # method to delete the first node found with specified value
     def delete(value)
       return nil if @head == nil
-      current = @head
-      previous = current 
-
-      until current == nil || previous.next == nil
-
-        if current.data == value
-          previous.next == nil
-          current.next = nil
-        end 
-      end
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
-      return if @head.nil?
-      
+      return nil if @head == nil
       current = @head
       previous = nil
-
-      until current.next.nil?
-        temp = current.next
+    
+      while current != nil
+        next_value = current.next  
         current.next = previous
         previous = current
-        current = temp
+        current = next_value 
       end
 
-      current.next = previous
-      @head = current
+      @head = previous
     end
 
 
@@ -161,22 +149,27 @@ class LinkedList
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
-    # def find_nth_from_end(n)
-    #   return nil if @head == nil
+    def find_nth_from_end(n)
+      return nil if @head == nil
+      
+      answer_pointer = @head
+      scanning_pointer = answer_pointer
+ 
+      n.times do 
+        if scanning_pointer.next != nil 
+          scanning_pointer = scanning_pointer.next
+        else
+          return nil
+        end
+      end
 
-    #   current = @head
-    #   nth_previous = current
-
-    #   until current.next == nil
-    #     (n - 1).times do
-    #       nth_previous = nth_previous.next
-    #     end
-
-    #     n.times do
-    #       current = current.next
-    #     end
-    #   end
-    # end
+      until scanning_pointer.next == nil
+        answer_pointer = answer_pointer.next
+        scanning_pointer = scanning_pointer.next
+      end
+      
+      return answer_pointer.data
+    end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
     # linked list links to a node already visited.
