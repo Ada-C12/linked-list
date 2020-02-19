@@ -144,7 +144,13 @@ class LinkedList
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
     def find_middle_value
-      raise NotImplementedError
+      return nil if @head.nil?
+      times_to_go = self.length / 2
+      current_node = @head
+      times_to_go.times do
+        current_node = current_node.next
+      end
+      return current_node.data        
     end
 
     # find the nth node from the end and return its value

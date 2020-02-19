@@ -225,4 +225,16 @@ describe LinkedList do
             expect(@list.find_nth_from_end(3)).must_equal 4
         end
     end
+
+    describe "find_middle_value" do
+        it 'can return the 5th item in a list of 10' do
+            count = 1
+            until count > 10
+                @list.add_first(count)
+                count += 1
+            end
+
+            expect(@list.find_middle_value()).must_equal 5
+        end
+    end
 end
