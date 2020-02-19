@@ -211,7 +211,7 @@ class LinkedList
     slow = @head
     fast = @head
     
-    while fast.nil && fast.next.nil
+    while fast.nil? && fast.next.nil? do 
       slow = slow.next
       
       fast = fast.next
