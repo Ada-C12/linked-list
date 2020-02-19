@@ -211,7 +211,7 @@ class LinkedList
     slow = @head
     fast = @head
     
-    while fast.nil? && fast.next.nil? do 
+    while (fast != nil? && fast.next != nil) do 
       slow = slow.next
       
       fast = fast.next
@@ -324,6 +324,8 @@ puts(list.visit())
 # puts(list.visit())
 
 # puts(list.find_middle_value())
+
+puts(list.has_cycle())
 
 list.insert_ascending(4)
 puts(list.visit())
