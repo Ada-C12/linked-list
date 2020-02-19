@@ -122,7 +122,17 @@ class LinkedList
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
-      raise NotImplementedError
+      current = @head
+      previous = nil
+
+      return nil if current.nil?
+      until current.nil?
+        temp = current
+        current.next = previous
+        current = current.next
+        previous = temp
+      end
+      @head = previous
     end
 
 
