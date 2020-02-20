@@ -70,7 +70,7 @@ class LinkedList
 
     # method that returns the length of the singly linked list
     def length
-      count = 1
+      count = 0
       node = @head
 
       return 0 if @head.nil?
@@ -79,6 +79,7 @@ class LinkedList
         count += 1
         node = node.next
       end
+      return count
     end
 
     # method that returns the value at a given index in the linked list
