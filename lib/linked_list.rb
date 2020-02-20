@@ -113,6 +113,7 @@ class LinkedList
       
       until current.nil?
         print current.data
+        current = current.next
       end
     end
 
@@ -163,11 +164,8 @@ class LinkedList
 
       return nil if @head.nil?
 
-      if length % 2 == 0
-        value = (length / 2) + 1
-      else
-        value = (length / 2)
-      end
+      value = (length / 2)
+
       return self.get_at_index(value)
       #OR...... this way is faster
       # fast = @root
@@ -198,6 +196,7 @@ class LinkedList
         n_ahead = n_ahead.next
       end
       return current.data
+      # return get_at_index(length() - 1 - n)
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
@@ -206,14 +205,23 @@ class LinkedList
     def has_cycle
       slow = @head
       fast = @head
+      fast = fast.next if fast
 
-      until fast.nil?
-        slow = slow.next
-        fast = fast.next
-        fast = fast.next
-        if slow == fast
+      until fast.nil? || slow.nil?
+        if fast == slow
           return true
         end
+        fast = fast.next
+        return true if fast == slow
+        fast = fast.next unless fast.nil?
+        slow = slow.next
+      # until fast.nil?
+      #   slow = slow.next
+      #   fast = fast.next
+      #   fast = fast.next unless fast.nil?
+      #   if slow == fast
+      #     return true
+      #   end
       end
       return false
     end
@@ -312,5 +320,24 @@ class LinkedList
       new_node = Node.new(input, temp)
       current.next = new_node
       return head
+    end
+
+    def intersection(list_a, list_b)
+      intersection_list = nil
+      current_a = list_a
+      current_b = list_b
+
+      until current_a.nil? || current_b.nil?
+        if current_a.data == current_b.data
+          intersection_list = Node.new(current_a.data, intersection_list)
+          current_a = current_a.next
+          current_b = current_b.next
+        elsif current_a.data < current_b.data
+          current_a = current_a.next
+        else
+          current_b = current_b.next
+        end
+      end
+      return intersection_list
     end
 end
