@@ -5,6 +5,7 @@ require 'minitest/skip_dsl'
 require_relative 'test_helper'
 
 
+
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe LinkedList do
@@ -25,7 +26,7 @@ describe LinkedList do
         it 'can add values to an empty list' do
             # Act
             @list.add_first(3)
-
+            
             # Assert
             expect(@list.get_first).must_equal 3
         end
@@ -60,6 +61,7 @@ describe LinkedList do
             expect(@list.search(3)).must_equal true
 
             expect(@list.search(2)).must_equal true
+      
         end
 
         it "returns false if the element is not in the list" do
@@ -74,7 +76,7 @@ describe LinkedList do
         end
     end
 
-    describe "length" do
+   describe "length" do
         it "will return 0 for an empty list" do
             expect(@list.length).must_equal 0
         end
@@ -192,7 +194,7 @@ describe LinkedList do
         end
     end
 
-    describe "nth_from_the_end" do
+    xdescribe "nth_from_the_end" do
         it 'returns nil if n is outside the bounds of the list' do
             expect(@list.find_nth_from_end(3)).must_be_nil
         end
@@ -210,6 +212,17 @@ describe LinkedList do
             expect(@list.find_nth_from_end(4)).must_be_nil
         end
     end
+
+    describe "visit" do
+        it 'can print all the values in the linked list' do
+            @list.add_first(4)
+            @list.add_first(3)
+            @list.add_first(2)
+            @list.add_first(1)
+
+            expect(@list.visit).must_equal [1, 2, 3, 4]
+        end 
+    end 
 
     describe "reverse" do
         it 'can retrieve an item at index n from the end in the list' do
