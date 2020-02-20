@@ -45,35 +45,35 @@ class LinkedList
   def find_max
     # checks if current is nil
     if @head
-      currentMax = @head.data
+      current_max = @head.data
     else
       return nil
     end
     
     # checks if next is nil
     if @head.next
-      checkAgainstMax = @head.next
+      check_against_max = @head.next
     else
-      return currentMax
+      return current_max
     end
     
-    while checkAgainstMax
-      if checkAgainstMax.data > currentMax
-        currentMax = checkAgainstMax.data
-        if checkAgainstMax.next
-          checkAgainstMax = checkAgainstMax.next
+    while check_against_max
+      if check_against_max.data > current_max
+        current_max = check_against_max.data
+        if check_against_max.next
+          check_against_max = check_against_max.next
         else
-          return currentMax
+          return current_max
         end
       else
-        if checkAgainstMax.next
-          checkAgainstMax = checkAgainstMax.next
+        if check_against_max.next
+          check_against_max = check_against_max.next
         else
-          return currentMax
+          return current_max
         end
       end
     end
-    return currentMax    
+    return current_max    
   end
   
   # method to return the min value in the linked list
@@ -81,35 +81,35 @@ class LinkedList
   def find_min
     # checks if current is nil
     if @head
-      currentMin = @head.data
+      current_min = @head.data
     else
       return nil
     end
     
     # checks if next is nil
     if @head.next
-      checkAgainstMin = @head.next
+      check_against_min = @head.next
     else
-      return currentMin
+      return current_min
     end
     
-    while checkAgainstMin
-      if checkAgainstMin.data < currentMin
-        currentMin = checkAgainstMin.data
-        if checkAgainstMin.next
-          checkAgainstMin = checkAgainstMin.next
+    while check_against_min
+      if check_against_min.data < current_min
+        current_min = check_against_min.data
+        if check_against_min.next
+          check_against_min = check_against_min.next
         else
-          return currentMin
+          return current_min
         end
       else
-        if checkAgainstMin.next
-          checkAgainstMin = checkAgainstMin.next
+        if check_against_min.next
+          check_against_min = check_against_min.next
         else
-          return currentMin
+          return current_min
         end
       end
     end
-    return currentMin
+    return current_min
   end
   
   
@@ -133,12 +133,12 @@ class LinkedList
   def get_at_index(index)
     if @head
       count = 0
-      currentNode = @head
+      current_node = @head
       while count < index
-        currentNode = currentNode.next
+        current_node = current_node.next
         count += 1
       end
-      return currentNode.data
+      return current_node.data
     else
       return nil
     end
@@ -163,28 +163,28 @@ class LinkedList
     # make sure head exists
     if @head
       # set current node to head
-      currentNode = @head
+      current_node = @head
       prevNode = nil
-      while currentNode
-        if currentNode.data == value
-          if currentNode.next
+      while current_node
+        if current_node.data == value
+          if current_node.next
             # remove current node from link by assigning current node's next to previous node
             if prevNode
-              prevNode.next = currentNode.next
-              currentNode = nil
+              prevNode.next = current_node.next
+              current_node = nil
             else
-              @head = currentNode.next
-              currentNode = nil
+              @head = current_node.next
+              current_node = nil
             end
           else
             # remove current node from link
             prevNode.next = nil
-            currentNode = nil
+            current_node = nil
           end
         else
-          prevNode = currentNode
-          if currentNode.next
-            currentNode = currentNode.next
+          prevNode = current_node
+          if current_node.next
+            current_node = current_node.next
           else
             return nil
           end
@@ -231,18 +231,18 @@ class LinkedList
     # UNTESTED
     if @head
       count = 0
-      endNode = @head
-      while endNode
-        endNode = endNode.next
+      end_node = @head
+      while end_node
+        end_node = end_node.next
         count += 1
       end
-      midPoint = count/2
-      midNode = @head
-      while count >= midPoint
-        midNode = midNode.next
+      mid_point = count/2
+      mid_node = @head
+      while count >= mid_point
+        mid_node = mid_node.next
         count -= 1
       end
-      return midNode.data
+      return mid_node.data
       
     else
       return nil
@@ -308,15 +308,15 @@ class LinkedList
   
   # method that inserts a given value as a new last node in the linked list
   def add_last(value)
-    newNode = Node.new(value)
+    new_node = Node.new(value)
     if @head
       current = @head
       while current.next
         current = current.next
       end
-      current.next = newNode
+      current.next = new_node
     else
-      @head = newNode
+      @head = new_node
     end
   end
   
