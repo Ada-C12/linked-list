@@ -1,4 +1,4 @@
-
+#first commit
 # Defines a node in the singly linked list
 class Node
   attr_reader :data # allow external entities to read value but not write
