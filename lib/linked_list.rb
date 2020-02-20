@@ -209,22 +209,22 @@ class LinkedList
     return nil if @head == nil
     
     slow = @head
-    fast = @head
+    fast = @head.next
     
     while (fast != nil? && fast.next != nil) do 
-      slow = slow.next
-      
-      fast = fast.next
-      fast = fast.next
-      
       if slow == fast
         return true
       end
+      
+      fast = fast.next
+      fast = fast.next unless fast.nil?
+      fast = fast.next
+      
+      slow = slow.next
     end
     
     return false
   end
-  
   
   # Additional Exercises 
   # returns the value in the first node
@@ -334,7 +334,7 @@ puts(list.visit())
 
 puts(list.has_cycle())
 
-list.insert_ascending(4)
-list.insert_ascending(15)
-list.insert_ascending(1)
-puts(list.visit())
+# list.insert_ascending(4)
+# list.insert_ascending(15)
+# list.insert_ascending(1)
+# puts(list.visit())
