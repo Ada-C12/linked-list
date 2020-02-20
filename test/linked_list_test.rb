@@ -14,7 +14,7 @@ describe LinkedList do
         @list = LinkedList.new
     end
 
-    xdescribe 'initialize' do
+    describe 'initialize' do
         it 'can be created' do
 
             # Assert
@@ -22,7 +22,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe 'add_first & get_first' do
+    describe 'add_first & get_first' do
         it 'can add values to an empty list' do
             # Act
             @list.add_first(3)
@@ -52,7 +52,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "search" do
+    describe "search" do
         it "can find an element" do
             @list = LinkedList.new
             @list.add_first(3)
@@ -76,7 +76,7 @@ describe LinkedList do
         end
     end
 
-   xdescribe "length" do
+   describe "length" do
         it "will return 0 for an empty list" do
             expect(@list.length).must_equal 0
         end
@@ -91,7 +91,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "addLast & getLast" do
+    describe "addLast & getLast" do
         it "will add to the front if the list is empty" do
             @list.add_last(1)
             expect(@list.get_first).must_equal 1
@@ -154,7 +154,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "delete" do
+    describe "delete" do
         it "delete from empty linked list is a no-op" do
             expect(@list.length).must_equal 0
             @list.delete(4)
@@ -213,7 +213,18 @@ describe LinkedList do
         end
     end
 
-    xdescribe "reverse" do
+    describe "visit" do
+        it 'can print all the values in the linked list' do
+            @list.add_first(4)
+            @list.add_first(3)
+            @list.add_first(2)
+            @list.add_first(1)
+
+            expect(@list.visit).must_equal [1, 2, 3, 4]
+        end 
+    end 
+
+    describe "reverse" do
         it 'can retrieve an item at index n from the end in the list' do
             @list.add_first(4)
             @list.add_first(3)

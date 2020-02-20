@@ -76,41 +76,97 @@ class LinkedList
 
     # method that returns the length of the singly linked list
     def length
+      return 0 if @head == nil
 
-      count = 0
+      length = 0
       current = @head
       # current 
 
       until current == nil
-        count += 1
+        length += 1
         current = current.next 
       end 
 
-      return count
+      return length
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      
+    
+      current = @head
+      value = ''
 
+      return current.data if index == 0
+
+      new_index = index + 1
+
+      new_index.times do |count|
+        return nil if current == nil
+        value = current.data
+        current = current.next
+      end 
+
+      return value 
     end
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      linked_list_array = []
+
+      current = @head 
+
+      until current == nil
+        linked_list_array.push(current.data)
+        current = current.next
+      end
+
+      return linked_list_array
     end
 
     # method to delete the first node found with specified value
     def delete(value)
-      raise NotImplementedError
+
+
+      return nil if @head == nil
+
+      current = @head
+
+      if current.data == value
+        @head = current.next
+        return
+      end
+
+      until current == nil
+        if current.next.data == value
+          current.next == current.next.next
+          return 
+        end 
+
+        current = current.next 
+      end 
+
+      return
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
-      raise NotImplementedError
+      return if @head.nil?
+
+      current = @head
+      previous = nil
+    
+      until current.next.nil?
+        temp = current.next
+        current.next = previous
+        previous = current
+        current = temp
+      end 
+    
+      current.next = previous
+      @head = current
     end
 
 
@@ -140,30 +196,37 @@ class LinkedList
     def get_first
       return nil if @head == nil
 
-      @head.data
+      return @head.data
     end
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      return nil if @head == nil
 
-      current = @head
-
-      last_node = ''
       new_node = Node.new(value)
 
-      until current == nil
-        last_node = current 
-        current = current.next
-      end
-
-      last_node.next = new_node
+      if @head.nil?
+        add_first(value)
+      else
+        current = @head
+        while current.next != nil
+          current = current.next
+        end
+        current.next = new_node
+      end	   
     end
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head
+
+      while current.next != nil
+        current = current.next
+      end 
+
+      return current.data
     end
 
     # method to insert a new node with specific data value, assuming the linked
