@@ -160,15 +160,23 @@ class LinkedList
     # returns the value at the middle element in the singly linked list
     def find_middle_value
       length = self.length
-      
+
       return nil if @head.nil?
 
       if length % 2 == 0
-        value = (length / 2) - 1
+        value = (length / 2) + 1
       else
         value = (length / 2)
       end
       return self.get_at_index(value)
+      #OR...... this way is faster
+      # fast = @root
+      # slow = @root
+      # until fast.nil?
+      #   fast = fast.next
+      #   fast = fast.next unless fast.nil?
+      #   slow = slow.next
+      # end
     end
 
     # find the nth node from the end and return its value
