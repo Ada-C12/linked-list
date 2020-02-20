@@ -125,11 +125,10 @@ class LinkedList
       current = @head
       previous = nil
 
-      return nil if current.nil?
       until current.nil?
         temp = current
-        current.next = previous
         current = current.next
+        temp.next = previous
         previous = temp
       end
       @head = previous
@@ -139,13 +138,36 @@ class LinkedList
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
     def find_middle_value
-      raise NotImplementedError
+      current = @head
+      middle = current
+
+      return nil if current.nil?
+      until current.nil?
+        middle.next = middle
+        current.next.next = current
+      end
+      return middle
     end
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
     def find_nth_from_end(n)
-      raise NotImplementedError
+      current = @head
+      from_end = current
+
+      return nil if current.nil?
+
+      n.times do
+        return nil if current.next.nil?
+        current = current.next
+      end
+      
+      until current.next.nil?
+        return from_end.data if from_end.next.nil?
+        from_end = from_end.next
+        current = current.next
+      end
+      return from_end.data
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
