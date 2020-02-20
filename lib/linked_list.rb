@@ -205,6 +205,10 @@ class LinkedList
 
       mid_el = length/2 
       
+      if length.even?
+        mid_el += 1
+      end
+      
       mid_el.times do
         result = result.next
       end
