@@ -266,7 +266,14 @@ class LinkedList
   # method to insert a new node with specific data value, assuming the linked
   # list is sorted in ascending order
   def insert_ascending(value)
-    return false if @head == nil
+    if @head == nil
+      return Node.new(value)
+    elsif value <= @head.data
+      @head = Node.new(value, @head)
+      return 
+    end
+    
+    
     previous = nil
     current = @head
     
@@ -326,4 +333,6 @@ puts(list.visit())
 # puts(list.find_middle_value())
 
 list.insert_ascending(4)
+list.insert_ascending(15)
+list.insert_ascending(1)
 puts(list.visit())
