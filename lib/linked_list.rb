@@ -140,6 +140,7 @@ class LinkedList
     return if @head.nil?
     current = @head
     previous = nil
+    temp = nil
     
     until current.next.nil?
       temp = current.next
@@ -168,7 +169,7 @@ class LinkedList
     return self.get_at_index(value)
   end
   
-  # find the nth node from the end and return its value
+  # find the nth node from the end and return it s value
   # assume indexing starts at 0 while counting to n
   def find_nth_from_end(n)
     current = @head
