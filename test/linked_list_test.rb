@@ -225,4 +225,88 @@ describe LinkedList do
             expect(@list.find_nth_from_end(3)).must_equal 4
         end
     end
+    
+    describe "has cycle" do
+        it "returns false if list doesn't have cycle for list with even number of nodes" do
+            @list.add_first(2)
+            @list.add_first(1)
+            
+            expect(@list.has_cycle).must_equal false
+        end
+        
+        it "returns false if list doesn't have cycle for list with odd number of nodes" do
+            @list.add_first(2)
+            @list.add_first(1)
+            @list.add_first(0)
+            
+            expect(@list.has_cycle).must_equal false
+        end
+        
+        it "returns false if list is empty" do
+            expect(@list.has_cycle).must_equal false
+        end
+        
+        it "returns true if list has cycle for list with even number of nodes" do
+            @list.add_first(2)
+            @list.add_first(1)
+            @list.create_cycle()
+            
+            expect(@list.has_cycle).must_equal true
+        end
+        
+        it "returns true if list has cycle for list with odd number of nodes"  do
+            @list.add_first(3)
+            @list.add_first(2)
+            @list.add_first(1)
+            @list.create_cycle()
+            
+            expect(@list.has_cycle).must_equal true
+        end
+    end
+
+    describe "insert_ascending" do
+        it "can insert to an empty list" do
+            @list.insert_ascending(1)
+
+            expect(@list.get_first).must_equal 1
+        end
+
+        it "can insert to the fron of a sorted list" do
+            @list.add_first(2)
+            @list.insert_ascending(1)
+
+            expect(@list.get_at_index(0)).must_equal 1
+            expect(@list.get_at_index(1)).must_equal 2
+        end
+
+        it "can insert to the end of a sorted list" do
+            @list.add_first(1)
+            @list.insert_ascending(2)
+
+            expect(@list.get_at_index(0)).must_equal 1
+            expect(@list.get_at_index(1)).must_equal 2
+        end
+
+        it "can insert to the middle of a sorted list" do
+            @list.add_first(3)
+            @list.add_first(1)
+            @list.insert_ascending(2)
+
+            expect(@list.get_at_index(0)).must_equal 1
+            expect(@list.get_at_index(1)).must_equal 2
+            expect(@list.get_at_index(2)).must_equal 3
+        end
+
+        it "can insert a duplicate value to a sorted list" do
+            @list.add_first(3)
+            @list.add_first(2)
+            @list.add_first(1)
+            @list.insert_ascending(2)
+
+            expect(@list.get_at_index(0)).must_equal 1
+            expect(@list.get_at_index(1)).must_equal 2
+            expect(@list.get_at_index(2)).must_equal 2
+            expect(@list.get_at_index(3)).must_equal 3
+        end
+    end
 end
