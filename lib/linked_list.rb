@@ -93,13 +93,13 @@ class LinkedList
   # index count starts at 0
   # returns nil if there are fewer nodes in the linked list than the index value
   def get_at_index(index)
-    count = 0
     current = @head
-    until count == index
+    
+    index.times do
       return nil if current.nil?
       current = current.next
-      count += 1
     end
+    
     return current.data
   end
   
@@ -117,7 +117,9 @@ class LinkedList
     current = @head
     previous = nil
     
-    return nil if current.nil?
+    if current == nil
+      return nil
+    end
     
     until current.data == value
       return nil if current.nil?
@@ -125,7 +127,7 @@ class LinkedList
       current = current.next
     end
     
-    if previous.nil?
+    if previous == nil
       @head = current.next
     else
       previous.next = current.next
@@ -170,19 +172,19 @@ class LinkedList
   # assume indexing starts at 0 while counting to n
   def find_nth_from_end(n)
     current = @head
-    n_ahead = @head
+    n_from_end = @head
     
     return nil if current.nil?
     
     n.times do
-      return nil if n_ahead.next.nil?
-      n_ahead = n_ahead.next
+      return nil if n_from_end.next.nil?
+      n_from_end = n_from_end.next
     end
     
-    until n_ahead.next.nil?
+    until n_from_end.next.nil?
       return current.data if current.next.nil?
       current = current.next
-      n_ahead = n_ahead.next
+      n_from_end = n_from_end.next
     end
     return current.data
   end
