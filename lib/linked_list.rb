@@ -1,4 +1,4 @@
-#first commit
+
 # Defines a node in the singly linked list
 class Node
   attr_reader :data # allow external entities to read value but not write
@@ -19,43 +19,96 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      raise NotImplementedError
+      current = @head
+      @head = Node.new(value, current)
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
-      raise NotImplementedError
+      if @head.nil?
+        return false
+      else
+        current = @head
+      end
+
+      while current
+        if current.data == value
+          return true
+        else
+          current = current.next
+        end
+      end
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      return nil if @head.nil?
+      current = @head
+      max = @head.data
+
+      while current
+        max = current.data if current.data > max
+        current = current.next
+      end
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
-      raise NotImplementedError
+      return nil if @head.nil?
+      current = @head
+      min = @head.data
+
+      while current
+        min = current.data if current.data < min
+        current = current.next
+      end    
     end
 
 
     # method that returns the length of the singly linked list
     def length
-      raise NotImplementedError
+      count = 1
+      node = @head
+
+      return 0 if @head.nil?
+
+      until node == nil
+        count += 1
+        node = node.next
+      end
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      raise NotImplementedError
+      return nil if @head.nil?
+
+      current = @head 
+      count = 0
+
+      until current.nil?
+        return current.data if count == index
+        count += 1
+        current = current.next
+      end
+
+      return nil
     end
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      return nil if @head.nil?
+      current = @head
+      linked_list = ""
+
+      while current
+        linked_list += "#{current.data}"
+        current = current.next
+      end
     end
 
     # method to delete the first node found with specified value
