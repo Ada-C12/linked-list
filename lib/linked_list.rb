@@ -234,8 +234,7 @@ class LinkedList
       current = @head
 
       if current.nil?
-        @head = Node.new(value)
-        return @head
+        return Node.new(value)
       end
 
       until current.next.nil?
@@ -292,5 +291,26 @@ class LinkedList
       end
 
       current.next = @head # make the last node link to first node
+    end
+
+    def add_values(head, input)
+      # we want to start by putting 14 at the beginning of the list because it's easier to add to the beginning than to the end
+      # the list is 4->10->12->52
+      # edge cases: if head is nil; if the input will be inserted in the first node; if it will be inserted in the last node
+      if head.nil?
+        return Node.new(input)
+      elsif head.value >= input
+        head = Node.new(input, head)
+        return head
+      end
+      current = head
+      while !current.next.nil? && current.next.data < input
+        current = current.next
+      end
+
+      temp = current.next
+      new_node = Node.new(input, temp)
+      current.next = new_node
+      return head
     end
 end
