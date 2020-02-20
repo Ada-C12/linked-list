@@ -322,7 +322,7 @@ class LinkedList
     # navigate to last node
     current = @head
     while current.next != nil
-        current = current.next
+      current = current.next
     end
 
     current.next = @head # make the last node link to first node
