@@ -232,9 +232,9 @@ class LinkedList
     fast = @head
 
     # traverse the list moving slow forward one node and fast two nodes until fast reaches last (or second-to-last) node
-    until fast.next.nil? || fast.next.next.nil?
+    until fast.nil? || fast.next.nil?
       slow = slow.next
-      fast = fast.next.next
+      fast = fast.next.next 
     end
 
     # when fast is at the last (odd list length) or second-to-last (even list length) node, slow is at the middle node

@@ -242,7 +242,7 @@ describe LinkedList do
             @list.add_first(2)
             @list.add_first(1)
 
-            expect(@list.find_middle_value).must_equal 2
+            expect(@list.find_middle_value).must_equal 3
         end
     end
 
