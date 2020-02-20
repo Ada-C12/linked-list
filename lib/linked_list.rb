@@ -282,7 +282,7 @@ class LinkedList
     fast = @head
 
     # traverse the list moving slow forward one node and fast two nodes until fast reaches last (or second-to-last) node
-    until fast.next.nil? || fast.next.next.nil?
+    until fast.nil?
       # if fast and slow ever point to the same node, we have a cycle
       if fast = slow
         return true
@@ -349,12 +349,12 @@ class LinkedList
     previous = nil
     until current.nil?
       # if node should be inserted before end of list
-      if current.next != nil && current.next.data > value
+      if current.next != nil && current.next.data >= value
         temp = current.next
         new_node = Node.new(value, temp)
         previous = current
         previous.next = new_node
-        current = temp
+        current = temp 
 
       # if node should be inserted at end of list
       elsif current.next.nil? && current.data < value
