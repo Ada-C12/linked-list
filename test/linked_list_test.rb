@@ -51,7 +51,7 @@ describe LinkedList do
         end
     end
     
-    xdescribe "search" do
+    describe "search" do
         it "can find an element" do
             @list = LinkedList.new
             @list.add_first(3)

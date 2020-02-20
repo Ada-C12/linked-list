@@ -26,7 +26,17 @@ class LinkedList
   # method to find if the linked list contains a node with specified value
   # returns true if found, false otherwise
   def search(value)
-    raise NotImplementedError
+    current = @head
+    
+    until current == nil
+      if current.data == value
+        return true
+      else
+        current = current.next
+      end
+    end
+    
+    return false
   end
   
   # method to return the max value in the linked list
@@ -87,7 +97,20 @@ class LinkedList
   # linked list links to a node already visited.
   # returns true if a cycle is found, false otherwise.
   def has_cycle
-    raise NotImplementedError
+    fast = @head.next
+    slow = @head
+    
+    until fast.nil? || slow.nil?
+      if fast == slow
+        return true
+      end
+      
+      fast = fast.next
+      fast = fast.next unless fast.nil?
+      slow = slow.next
+    end
+    
+    return false
   end
   
   
