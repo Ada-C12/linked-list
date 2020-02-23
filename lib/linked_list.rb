@@ -19,74 +19,253 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
-      raise NotImplementedError
+      if @head != nil
+        current = @head
+        @head = Node.new(value, current)
+      else
+        @head = Node.new(value)
+      end
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
-      raise NotImplementedError
+      if @head.nil?
+        return false
+      end
+
+      current = @head
+
+      until current.nil?
+        if current.data == value
+          return true
+        end
+        current = current.next
+      end
+        return false
+
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
-      raise NotImplementedError
+      current = @head
+
+      if current.nil?
+        return nil
+      end
+
+      max_value = @head.data
+      until current.nil?
+        if current.data > max_value
+          max_value = current.data
+        end
+        current = current.next
+      end
+
+      return max_value
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
-      raise NotImplementedError
+      current = @head
+
+      if current.nil?
+        return nil
+      end
+
+      min_value = @head.data
+      until current.nil?
+        if current.data < min_value
+          min_value = current.data
+        end
+        current = current.next
+      end
+
+      return min_value
+
     end
 
 
     # method that returns the length of the singly linked list
     def length
-      raise NotImplementedError
+      current = @head
+
+      len = 0
+      until current.nil?
+        len += 1
+        current = current.next
+      end
+
+      return len
     end
 
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
-      raise NotImplementedError
+      if @head == nil
+        return nil
+      end
+
+      current = @head
+      result = @head 
+      length = 0
+      until current.nil?
+        length += 1
+        current = current.next
+      end
+
+      if index > (length - 1)
+        return nil
+      else
+        (index).times do
+          result = result.next
+        end
+        return result.data
+      end
+
+      
     end
 
     # method to print all the values in the linked list
     def visit
-      raise NotImplementedError
+      current = @head
+
+      until current.nil?
+        print current.data
+        current = current.next
+      end
     end
 
     # method to delete the first node found with specified value
     def delete(value)
-      raise NotImplementedError
+      current = @head
+
+      if current.nil?
+        return nil
+      end
+    
+      if current.data == value
+        @head = @head.next
+      else 
+        previous_node = current
+        next_node = current.next
+        until next_node.nil?
+          if next_node.data == value
+            previous_node.next = next_node.next
+            return
+          end
+          previous_node = next_node
+          next_node = next_node.next
+        end
+      end
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
-      raise NotImplementedError
+
+      return if @head.nil?
+
+      current = @head
+      next_node = current.next
+
+      @head.next = nil 
+
+      until next_node.nil?
+        temp = next_node.next
+        next_node.next = current
+        current = next_node
+        next_node = temp
+      end
+
+      @head = current
+
+
     end
 
 
     ## Advanced Exercises
     # returns the value at the middle element in the singly linked list
     def find_middle_value
-      raise NotImplementedError
+      current = @head
+      result = @head
+
+      if current.nil?
+        return nil
+      end
+
+      length = 0
+      until current.nil?
+        length += 1
+        current = current.next
+      end
+
+      mid_el = length/2 
+      
+      if length.even?
+        mid_el += 1
+      end
+      
+      mid_el.times do
+        result = result.next
+      end
+
+      return result.data
+
     end
 
     # find the nth node from the end and return its value
     # assume indexing starts at 0 while counting to n
     def find_nth_from_end(n)
-      raise NotImplementedError
+      i = @head
+      j = @head
+
+      outside_bound = false
+      n.times do
+        if j != nil
+          j = j.next
+        else
+          outside_bound = true
+        end
+      end
+
+      if outside_bound == true || j == nil
+        return nil
+      end
+
+      until j.next == nil
+        i = i.next
+        j = j.next
+      end
+
+      return i.data
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
     # linked list links to a node already visited.
     # returns true if a cycle is found, false otherwise.
     def has_cycle
-      raise NotImplementedError
+      return if @head == nil
+
+      i = @head
+      j = @head.next
+
+      until j.nil?
+        i = i.next
+        j = j.next
+
+        if j == i || j.next == i
+          return true
+        else
+          j = j.next
+        end
+      end
+
+      return false
+
     end
 
 
@@ -94,24 +273,73 @@ class LinkedList
     # returns the value in the first node
     # returns nil if the list is empty
     def get_first
-      raise NotImplementedError
+      current = @head
+
+      if @head.nil?
+        return nil
+      else
+        return @head.data
+      end
     end
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      raise NotImplementedError
+      if @head == nil
+        @head = Node.new(value)
+      else
+        current = @head 
+        while current.next != nil
+          current = current.next
+        end
+
+        last_node = Node.new(value)
+        current.next = last_node
+      end
     end
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
     def get_last
-      raise NotImplementedError
+      if @head.nil?
+        return nil
+      end
+
+      current = @head 
+      while current.next != nil
+        current = current.next
+      end
+
+      return current.data
+
     end
 
     # method to insert a new node with specific data value, assuming the linked
     # list is sorted in ascending order
     def insert_ascending(value)
-      raise NotImplementedError
+      return if @head == nil
+
+      current = @head
+      next_node = current.next
+      
+      new_node = Node.new(value)
+
+      if new_node.data < current.data
+        new_node.next = current
+      end
+
+      while next_node != nil
+        if (current < new_node.data) && (next_node.data > new_node.data)
+          current.next = new_node
+          new_node.next = next_node
+        end
+          current = current.next
+          next_node = next_node.next
+      end
+
+      if current.data < new_node.data
+        current.next = current
+      end
+
     end
 
     # Helper method for tests
