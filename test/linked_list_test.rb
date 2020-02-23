@@ -262,6 +262,13 @@ describe LinkedList do
             expect(@list.has_cycle).must_equal true
         end
 
+        it 'returns false for a multiple-node list without a cycle' do
+            @list.add_first(9)
+            @list.add_first(8)   
+            @list.add_first(7)  
+            expect(@list.has_cycle).must_equal false
+        end
+
         it 'returns true for a multiple-node odd-length list with a cycle' do 
             @list.add_first(3)   
             @list.add_first(2)   
