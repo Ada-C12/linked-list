@@ -1,6 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/skip_dsl'
+require 'minitest/pride'
+require 'pry'
 
 require_relative 'test_helper'
 
@@ -89,7 +91,7 @@ describe LinkedList do
         end
     end
 
-    describe "addLast & getLast" do
+    describe "add_last & get_last" do
         it "will add to the front if the list is empty" do
             @list.add_last(1)
             expect(@list.get_first).must_equal 1
@@ -166,7 +168,7 @@ describe LinkedList do
             @list.add_first(3)
             @list.add_first(2)
 
-            # delete fist node (requires updating head)
+            # delete first node (requires updating head)
             @list.delete(2)
             expect(@list.get_first).must_equal 3
             expect(@list.length).must_equal 4
@@ -212,6 +214,17 @@ describe LinkedList do
     end
 
     describe "reverse" do
+        it 'returns nil if list is empty' do
+            expect(@list.reverse).must_be_nil
+        end
+
+        it 'returns correct value is list has only one node' do
+            @list.add_first(5)
+            @list.reverse
+
+            expect(@list.get_first).must_equal 5
+        end
+
         it 'can retrieve an item at index n from the end in the list' do
             @list.add_first(4)
             @list.add_first(3)
@@ -225,4 +238,140 @@ describe LinkedList do
             expect(@list.find_nth_from_end(3)).must_equal 4
         end
     end
+
+    describe "find middle value" do
+        it 'returns nil if list is empty' do
+            expect(@list.find_middle_value).must_be_nil
+        end
+
+        it 'returns correct value is list has only one node' do
+            @list.add_first(5)        
+            expect(@list.find_middle_value).must_equal 5
+        end
+
+        it 'can find the middle value for an odd-length list' do
+            @list.add_first(5)       
+            @list.add_first(4)
+            @list.add_first(3)
+            @list.add_first(2)
+            @list.add_first(1)
+
+            expect(@list.find_middle_value).must_equal 3
+        end
+
+        it 'can find the middle value for an even-length list' do
+            @list.add_first(4)       
+            @list.add_first(3)
+            @list.add_first(2)
+            @list.add_first(1)
+
+            expect(@list.find_middle_value).must_equal 3
+        end
+    end
+
+    describe "has cycle" do
+        it 'returns false if list is empty' do
+            expect(@list.has_cycle).must_equal false
+        end
+
+        it 'returns false for a single-node list without a cycle' do
+            @list.add_first(9)        
+            expect(@list.has_cycle).must_equal false
+        end
+
+        it 'returns true for a single-node list with a cycle' do 
+            @list.add_first(9)   
+            @list.create_cycle
+            expect(@list.has_cycle).must_equal true
+        end
+
+        it 'returns false for a multiple-node list without a cycle' do
+            @list.add_first(9)
+            @list.add_first(8)   
+            @list.add_first(7)  
+            expect(@list.has_cycle).must_equal false
+        end
+
+        it 'returns true for a multiple-node odd-length list with a cycle' do 
+            @list.add_first(3)   
+            @list.add_first(2)   
+            @list.add_first(1)
+
+            @list.create_cycle
+
+            expect(@list.has_cycle).must_equal true
+
+        end
+
+        it 'returns true for a multiple-node even-length list with a cycle' do 
+            @list.add_first(4)   
+            @list.add_first(3)   
+            @list.add_first(2)   
+            @list.add_first(1)   
+
+            @list.create_cycle
+
+            expect(@list.has_cycle).must_equal true
+        end
+    end
+
+    describe "visit" do
+        it 'returns nil if list is empty' do
+            expect(@list.visit).must_be_nil
+        end
+
+        it 'prints the head value if list has one node' do
+            @list.add_first(9)        
+            expect(@list.visit).must_equal 9
+        end
+
+        it 'returns correct values for a list with multiple nodes' do
+            @list.add_first(4)   
+            @list.add_first(3)   
+            @list.add_first(2)   
+            @list.add_first(1)  
+            expect(@list.visit).must_equal '1 2 3 4'
+        end
+
+    end
+
+    describe "insert ascending" do
+        it 'inserts value at head if list is empty' do
+            @list.insert_ascending(7)
+            expect(@list.get_first).must_equal 7
+        end
+
+        it 'can insert a value at the beginning of a linked list' do
+            @list.add_first(4)   
+            @list.add_first(3)   
+            @list.add_first(2)   
+            @list.insert_ascending(1)
+            expect(@list.length).must_equal 4
+            expect(@list.get_first).must_equal 1
+        end
+
+        it 'can insert a value in the middle of a linked list' do
+            @list.add_first(5)   
+            @list.add_first(4)   
+            @list.add_first(2)   
+            @list.add_first(1)  
+            @list.insert_ascending(3)
+            expect(@list.length).must_equal 5
+            expect(@list.find_middle_value).must_equal 3
+        end
+
+        it 'can insert a value at the end of a linked list' do
+            @list.add_first(4)   
+            @list.add_first(3)   
+            @list.add_first(2)   
+            @list.add_first(1) 
+            @list.add_first(0)
+            @list.add_first(-1)
+            @list.insert_ascending(6)
+            expect(@list.length).must_equal 7
+            expect(@list.get_last).must_equal 6
+        end
+
+    end
+
 end
