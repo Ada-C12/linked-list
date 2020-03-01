@@ -170,7 +170,15 @@ class LinkedList
   # Time Complexity:
   # Space Complexity:
   def find_middle_value
-    raise NotImplementedError
+    fast = @root
+    slow = @root
+    
+    until fast.nil?
+      fast = fast.next
+      fast = fast.next unless fast.nil?
+      slow = slow.next
+    end
+    return slow
   end
   
   # find the nth node from the end and return its value
@@ -203,7 +211,21 @@ class LinkedList
   # Time Complexity:
   # Space Complexity:
   def has_cycle
-    raise NotImplementedError
+    fast = @head.next
+    fast = fast.next if fast
+    slow = @head
+    
+    until fast.nil? || slow.nil?
+      if fast == slow
+        return true
+      end
+      
+      fast = fast.next
+      return if fast == slow
+      fast = fast.next unless fast.nil?
+      slow = slow.next
+    end
+    return false
   end
   
   # Additional Exercises 
@@ -212,7 +234,7 @@ class LinkedList
   # Time Complexity: O(n)
   # Space Complexity: O(1)
   def get_first
-    return if @head.nil?
+    return nil if @head.nil?
     @head.data
   end
   
@@ -239,7 +261,7 @@ class LinkedList
   # Time Complexity: O(n)
   # Space Complexity: O(1)
   def get_last
-    return if @head.nil?  
+    return nil if @head.nil?  
     
     current = @head
     until current.next.nil?
