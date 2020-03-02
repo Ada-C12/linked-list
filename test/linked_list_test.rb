@@ -112,7 +112,7 @@ describe LinkedList do
         end
     end
     
-    xdescribe 'get_at_index' do
+    describe 'get_at_index' do
         it 'returns nil if the index is outside the bounds of the list' do
             expect(@list.get_at_index(3)).must_be_nil
         end
@@ -130,7 +130,7 @@ describe LinkedList do
         end
     end
     
-    xdescribe 'max and min values' do
+    describe 'max and min values' do
         it 'returns nil if the list is empty' do
             expect(@list.find_max()).must_be_nil
             expect(@list.find_min()).must_be_nil

@@ -42,13 +42,43 @@ class LinkedList
   # method to return the max value in the linked list
   # returns the data value and not the node
   def find_max
-    raise NotImplementedError
+    current = @head
+    
+    if current == nil
+      return nil
+    end
+    
+    max = current.data
+    
+    until current == nil
+      if current.data > max
+        max = current.data
+      end
+      current = current.next
+    end
+    
+    return max
   end
   
   # method to return the min value in the linked list
   # returns the data value and not the node
   def find_min
-    raise NotImplementedError
+    current = @head
+    
+    if current == nil
+      return nil
+    end
+    
+    min = current.data
+    
+    until current == nil
+      if current.data < min
+        min = current.data
+      end
+      current = current.next
+    end
+    
+    return min
   end
   
   
@@ -72,7 +102,23 @@ class LinkedList
   # index count starts at 0
   # returns nil if there are fewer nodes in the linked list than the index value
   def get_at_index(index)
-    raise NotImplementedError
+    current = @head
+    counter = 0
+    
+    if current == nil
+      return nil
+    end
+    
+    while counter <= index
+      if current == nil
+        return nil
+      elsif counter == index
+        return current.data
+      end
+      
+      current = current.next 
+      counter += 1
+    end
   end
   
   # method to print all the values in the linked list
