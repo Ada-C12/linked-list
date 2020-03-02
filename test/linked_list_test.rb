@@ -211,7 +211,7 @@ describe LinkedList do
         end
     end
     
-    xdescribe "reverse" do
+    describe "reverse" do
         it 'can retrieve an item at index n from the end in the list' do
             @list.add_first(4)
             @list.add_first(3)
