@@ -152,7 +152,7 @@ describe LinkedList do
         end
     end
     
-    xdescribe "delete" do
+    describe "delete" do
         it "delete from empty linked list is a no-op" do
             expect(@list.length).must_equal 0
             @list.delete(4)
@@ -192,7 +192,7 @@ describe LinkedList do
         end
     end
     
-    xdescribe "nth_from_the_end" do
+    describe "nth_from_the_end" do
         it 'returns nil if n is outside the bounds of the list' do
             expect(@list.find_nth_from_end(3)).must_be_nil
         end

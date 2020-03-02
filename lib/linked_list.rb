@@ -128,7 +128,21 @@ class LinkedList
   
   # method to delete the first node found with specified value
   def delete(value)
-    raise NotImplementedError
+    current = @head
+    previous = nil
+    
+    until current == nil
+      if current.data == value
+        if previous == nil 
+          @head = current.next
+        else
+          previous.next = current.next
+        end
+      end
+      
+      previous = current
+      current = current.next
+    end
   end
   
   # method to reverse the singly linked list
@@ -147,7 +161,25 @@ class LinkedList
   # find the nth node from the end and return its value
   # assume indexing starts at 0 while counting to n
   def find_nth_from_end(n)
-    raise NotImplementedError
+    current = @head
+    counter = 0
+    all_data = []
+    
+    if current == nil
+      return nil
+    end
+    
+    until current == nil
+      all_data << current.data
+      current = current.next
+      counter += 1
+    end
+    
+    if n >= all_data.length 
+      return nil
+    end
+    
+    return all_data[all_data.length - (n + 1)]
   end
   
   # checks if the linked list has a cycle. A cycle exists if any node in the
