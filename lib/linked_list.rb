@@ -19,44 +19,56 @@ class LinkedList
     # method to add a new node with the specific data value in the linked list
     # insert the new node at the beginning of the linked list
     def add_first(value)
+      # circular linked list, therefore @head point to itself
       @head = Node.new(value, @head)
     end
 
     # method to find if the linked list contains a node with specified value
     # returns true if found, false otherwise
     def search(value)
-      checker = @head
+      current = @head
 
-      until checker.nil?
-        return true if checker.data == value
-        checker = checker.next
+      until current.nil?
+        return true if current.data == value
+        current = current.next
       end
+
       return false
     end
 
     # method to return the max value in the linked list
     # returns the data value and not the node
     def find_max
+      # 1. if linked list is empty:
       return nil if @head.nil?
+
+      # 2. if not empty:
       max = @head.data
-      marker = @head.next
-      until marker.nil?
-        max = marker.data if marker.data > max
-        marker = marker.next
+      upcoming = @head.next
+
+      until upcoming.nil?
+        max = upcoming.data if upcoming.data > max
+        upcoming = upcoming.next
       end
+
       return max
     end
 
     # method to return the min value in the linked list
     # returns the data value and not the node
     def find_min
+      # 1. if linked list is empty:
       return nil if @head.nil?
+
+      # 2. if not empty:
       min = @head.data
-      marker = @head.next
-      until marker.nil?
-        min = marker.data if marker.data < min
-        marker = marker.next
+      upcoming = @head.next
+
+      until upcoming.nil?
+        min = upcoming.data if upcoming.data < min
+        upcoming = upcoming.next
       end
+
       return min
     end
 
@@ -64,11 +76,13 @@ class LinkedList
     # method that returns the length of the singly linked list
     def length
       length = 0
-      current = @head    
+      current = @head
+
       until current.nil?
         length += 1
         current = current.next
       end
+
       return length
     end
 
@@ -76,64 +90,66 @@ class LinkedList
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
     def get_at_index(index)
+      # rule out input error: index > length || index < 0
       return nil if index > self.length || index < 0
-      curr = @head
-
+      
+      current = @head
       index.times do
-        curr = curr.next
+        current = current.next
       end
 
-      return curr.data
+      return current.data
     end
 
     # method to print all the values in the linked list
     def visit
+      # if linked list is empty:
       return nil if @head.nil?
-      curr = @head
-
-      until curr.nil?
-        p curr.data
-        curr = curr.next
+      
+      current = @head
+      until current.nil?
+        # p instead of return to continue the loop
+        p current.data
+        current = current.next
       end
     end
 
     # method to delete the first node found with specified value
     def delete(value)
-      curr = @head
-      previous = nil
+      # if linked list is empty:
+      return nil if @head.nil?
+      
+      current = @head
+      @head = @head.next if current.data == value
 
-      return nil if curr.nil?
-
-      until curr.data == value
-        if curr.nil?
-          return nil
-        else
-          previous = curr
-          curr = curr.next
+      until current.next.nil?
+        if current.next.data == value
+          current.next = current.next.next
+          return
         end
+        current = current.next
       end
 
-      if previous == nil
-        @head = curr.next
-      else
-        previous.next = curr.next
-      end
+      return
     end
 
     # method to reverse the singly linked list
     # note: the nodes should be moved and not just the values in the nodes
     def reverse
+      # nothing to be reversed if list is empty or only has one node:
       return if @head.nil? || @head.next.nil?
 
-      curr = @head
+      current = @head
       prev = nil
 
-      until curr.nil?
-        temp = curr.next
-        curr.next = prev
-        prev = curr
-        curr = temp
+      until current.nil?
+        temp = current.next
+        current.next = prev
+        prev = current
+        current = temp
       end
+
+      @head = prev
     end
 
 
@@ -174,19 +190,22 @@ class LinkedList
     end
 
     # checks if the linked list has a cycle. A cycle exists if any node in the
-    # linked list links to a node already visited.
+    # linked list links to a node already visited < different def than circular LI >
     # returns true if a cycle is found, false otherwise.
     def has_cycle
       return false if @head.nil?
-      marker = @head.next
+      
+      slow = @head.next
+      fast = @head.next.next
 
-      until marker.nil? 
-        return true if marker == @head
-        marker = marker.next
+      until fast.nil?
+        return true if fast == slow
+        fast = fast.next
+        slow = slow.next
       end
+
       return false
     end
-
 
     # Additional Exercises 
     # returns the value in the first node
@@ -198,12 +217,12 @@ class LinkedList
 
     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
-      if @head.nil?
-        @head = Node.new(value)
-      end
+      # 1. if list is empty:
+      self.add_first(value) if @head.nil?
 
+      # 2. if not empty:
       curr = @head
-      self.(length-1).times do
+      (self.length - 1).times do
         curr = curr.next
       end
       curr.next = Node.new(value)
@@ -237,6 +256,7 @@ class LinkedList
           if value >= curr.data
             new = Node.new(value,curr.next.next)
             curr.next = new
+            return
           end
           curr = curr.next
         end
