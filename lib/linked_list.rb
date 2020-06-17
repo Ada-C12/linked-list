@@ -64,8 +64,8 @@ class LinkedList
       return nil if @head == nil
       
       current = @head
-      min = 0
-      until current == nil
+      min = @head.data
+      while current != nil
         if current.data < min
           min = current.data
         end
@@ -121,6 +121,22 @@ class LinkedList
     # method to delete the first node found with specified value
     def delete(value)
       return nil if @head == nil
+
+      if @head.data == value
+        @head = @head.next
+      end
+
+      curr = @head
+      prev = nil
+
+      while curr != nil
+        if curr.data == value
+            prev.next = curr.next
+        end
+        prev = curr
+        curr = curr.next
+      end
+      return @head
     end
 
     # method to reverse the singly linked list
