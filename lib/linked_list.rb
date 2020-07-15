@@ -51,13 +51,13 @@ class LinkedList
       current = @head
       return nil if @head.nil?
 
-      if current.data < max && !current.next.nil?
+      if current.data < max 
         current = current.next
-      elsif max < current.data
+      elsif current.data > max 
         max = current.data
       end
 
-      return max if current.next.nil?
+      return max
 
     end
 
@@ -68,22 +68,33 @@ class LinkedList
       min = 0 
       current = @head
       return nil if @head.nil?
+      # return min if current.next.nil?
 
-      if current.data > min && !current.next.nil?
+      if current.data > min
         current = current.next
-      elsif min > current.data
+      elsif current.data < min  
         min = current.data
       end
 
-      return min if current.next.nil?
+      return min
       
     end
 
 
 #     # method that returns the length of the singly linked list
-#     def length
-#       raise NotImplementedError
-#     end
+    # def length
+      
+    #   current = @head
+    #   length = 0
+    
+    #   until current.nil?
+    #     current = current.next
+    #     length += 1
+    #   end
+
+    #   return length
+
+    # end
 
 #     # method that returns the value at a given index in the linked list
 #     # index count starts at 0
@@ -141,15 +152,27 @@ class LinkedList
     end
 
 #     # method that inserts a given value as a new last node in the linked list
-#     def add_last(value)
-#       raise NotImplementedError
-#     end
+    def add_last(value)
+      
+      @head = Node.new(value) if @head.nil?
+      current = @head
+      current = current.next unless current.next.nil?
+      current.next = Node.new(value)
+    
+    end
 
 #     # method that returns the value of the last node in the linked list
 #     # returns nil if the linked list is empty
-#     def get_last
-#       raise NotImplementedError
-#     end
+
+    def get_last
+      
+      return nil if @head.nil?
+
+      current = @head
+      current = current.next until current.next.nil?
+      return current.data
+
+    end
 
 #     # method to insert a new node with specific data value, assuming the linked
 #     # list is sorted in ascending order
