@@ -22,10 +22,9 @@ class LinkedList
     # insert the new node at the beginning of the linked list
     def add_first(value)
       
-      new_node = Node.new(value)
-      next_node = @head unless @head.nil?
+      new_node = Node.new(value, @head)
       @head = new_node
-
+      
     end
 #     # method to find if the linked list contains a node with      specified value
 #     # returns true if found, false otherwise
@@ -82,26 +81,37 @@ class LinkedList
 
 
 #     # method that returns the length of the singly linked list
-    # def length
+    def length
       
-    #   current = @head
-    #   length = 0
+      current = @head
+      length = 0
     
-    #   until current.nil?
-    #     current = current.next
-    #     length += 1
-    #   end
+      until current.nil?
+        length += 1
+        current = current.next
+      end
 
-    #   return length
+      return length
 
-    # end
+    end
 
 #     # method that returns the value at a given index in the linked list
 #     # index count starts at 0
 #     # returns nil if there are fewer nodes in the linked list than the index value
-#     def get_at_index(index)
-#       raise NotImplementedError
-#     end
+    def get_at_index(index)
+
+      current = @head
+      current_index = 0
+      
+      until current_index == index
+        return nil if current.nil? 
+        current = current.next
+        current_index += 1
+      end
+
+      return current.data
+
+    end
 
 #     # method to print all the values in the linked list
 #     def visit
