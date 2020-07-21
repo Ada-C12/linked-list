@@ -50,10 +50,11 @@ class LinkedList
       current = @head
       return nil if @head.nil?
 
-      if current.data < max 
+      until current.nil?
+        if current.data > max  
+          max = current.data
+        end
         current = current.next
-      elsif current.data > max 
-        max = current.data
       end
 
       return max
@@ -67,12 +68,12 @@ class LinkedList
       min = 0 
       current = @head
       return nil if @head.nil?
-      # return min if current.next.nil?
 
-      if current.data > min
+      until current.nil?
+        if current.data < min  
+          min = current.data
+        end
         current = current.next
-      elsif current.data < min  
-        min = current.data
       end
 
       return min
