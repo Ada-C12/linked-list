@@ -120,9 +120,28 @@ class LinkedList
 #     end
 
 #     # method to delete the first node found with specified value
-#     def delete(value)
-#       raise NotImplementedError
-#     end
+    def delete(value)
+
+      # current = @head
+      # previous = nil 
+      # return nil if current.nil?
+
+    #   binding.pry
+    #   # until current.data == value
+    #   #   previous = current
+    #   #   current = current.next
+    #   # end
+
+    #   # if current.next.nil?
+    #   #   p previous, current
+    #   # end
+
+    #   # previous.next = current.next
+    #   # p previous, current
+
+    #   # end
+ 
+    end
 
 #     # method to reverse the singly linked list
 #     # note: the nodes should be moved and not just the values in the nodes
@@ -165,11 +184,19 @@ class LinkedList
 #     # method that inserts a given value as a new last node in the linked list
     def add_last(value)
       
-      @head = Node.new(value) if @head.nil?
-      current = @head
-      current = current.next unless current.next.nil?
-      current.next = Node.new(value)
+      current = @head 
+
+      if current.nil?
+        @head = Node.new(value)
+        return
+      end
+        
+      until current.next.nil?
+        current = current.next
+      end
     
+      current.next = Node.new(value)
+
     end
 
 #     # method that returns the value of the last node in the linked list
@@ -194,15 +221,15 @@ class LinkedList
 #     # Helper method for tests
 #     # Creates a cycle in the linked list for testing purposes
 #     # Assumes the linked list has at least one node
-#     def create_cycle
-#       return if @head == nil # don't do anything if the linked list is empty
+    def create_cycle
+      return if @head == nil # don't do anything if the linked list is empty
 
-#       # navigate to last node
-#       current = @head
-#       while current.next != nil
-#           current = current.next
-#       end
+      # navigate to last node
+      current = @head
+      while current.next != nil
+          current = current.next
+      end
 
-#       current.next = @head # make the last node link to first node
-#     end
+      current.next = @head # make the last node link to first node
+    end
 end
