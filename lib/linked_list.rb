@@ -65,9 +65,10 @@ class LinkedList
 #     # returns the data value and not the node
     def find_min
 
-      min = 0 
+      
       current = @head
       return nil if @head.nil?
+      min = @head.data
 
       until current.nil?
         if current.data < min  
@@ -122,25 +123,20 @@ class LinkedList
 #     # method to delete the first node found with specified value
     def delete(value)
 
-      # current = @head
-      # previous = nil 
-      # return nil if current.nil?
+      current = @head
+      previous = nil 
+      return nil if current.nil?
 
-    #   binding.pry
-    #   # until current.data == value
-    #   #   previous = current
-    #   #   current = current.next
-    #   # end
+    
+      until current.data == value
+        previous = current
+        current = current.next
+      end
 
-    #   # if current.next.nil?
-    #   #   p previous, current
-    #   # end
+      @head = current.next if previous.nil? 
 
-    #   # previous.next = current.next
-    #   # p previous, current
+      # binding.pry
 
-    #   # end
- 
     end
 
 #     # method to reverse the singly linked list
