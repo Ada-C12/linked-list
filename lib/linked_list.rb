@@ -133,9 +133,14 @@ class LinkedList
         current = current.next
       end
 
-      @head = current.next if previous.nil? 
-
-      # binding.pry
+      
+      
+      if previous.nil?
+        @head = current.next 
+      else
+        previous.next = current.next
+      end
+      
 
     end
 
