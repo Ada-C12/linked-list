@@ -178,9 +178,12 @@ class LinkedList
 
 #     ## Advanced Exercises
 #     # returns the value at the middle element in the singly linked list
-#     def find_middle_value
-#       raise NotImplementedError
-#     end
+    def find_middle_value
+      
+      mid = self.length / 2
+      self.get_at_index(mid)
+
+    end
 
 #     # find the nth node from the end and return its value
 #     # assume indexing starts at 0 while counting to n
