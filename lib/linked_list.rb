@@ -182,7 +182,7 @@ class LinkedList
       
       mid = self.length / 2
       self.get_at_index(mid)
-
+     
     end
 
 #     # find the nth node from the end and return its value

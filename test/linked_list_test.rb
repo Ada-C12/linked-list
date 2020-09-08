@@ -130,7 +130,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "delete" do
+    describe "delete" do
         it "delete from empty linked list is a no-op" do
             expect(@list.length).must_equal 0
             @list.delete(4)
@@ -144,7 +144,7 @@ describe LinkedList do
             @list.add_first(3)
             @list.add_first(2)
 
-            # delete fist node (requires updating head)
+            # delete first node (requires updating head)
             @list.delete(2)
             expect(@list.get_first).must_equal 3
             expect(@list.length).must_equal 4
@@ -170,7 +170,7 @@ describe LinkedList do
         end
     end
 
-    xdescribe "nth_from_the_end" do
+    describe "nth_from_the_end" do
         it 'returns nil if n is outside the bounds of the list' do
             expect(@list.find_nth_from_end(3)).must_be_nil
         end
@@ -189,8 +189,9 @@ describe LinkedList do
         end
     end
 
-    xdescribe "reverse" do
+    describe "reverse" do
         it 'can retrieve an item at index n from the end in the list' do
+
             @list.add_first(4)
             @list.add_first(3)
             @list.add_first(2)
@@ -203,4 +204,19 @@ describe LinkedList do
             expect(@list.find_nth_from_end(3)).must_equal 4
         end
     end
+
+    describe "find_middle_value" do
+        it "can return the value at the middle node" do
+
+        @list.add_first(4)
+        @list.add_first(3)
+        @list.add_first(2)
+        @list.add_first(1)
+        @list.add_first(0)
+
+        expect(@list.find_middle_value).must_equal 2
+        end
+    end
+
+        
 end
